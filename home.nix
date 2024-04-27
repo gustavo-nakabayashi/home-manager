@@ -1,0 +1,154 @@
+{ config, pkgs, ... }:
+
+{
+  home.username = "gustavo";
+  home.homeDirectory = "/home/gustavo";
+
+  home.stateVersion = "23.11"; # Please read the comment before changing.
+
+    home.packages = with pkgs; [
+      lazygit
+      nodejs
+      git
+      fzf
+      cargo
+
+# neovim
+      fd
+      ripgrep
+      ranger
+      zsh-powerlevel10k
+
+
+# builds
+    bison
+    flex
+    fontforge
+    makeWrapper
+    pkg-config
+    gnumake
+    gcc
+    libiconv
+    autoconf
+    automake
+    libtool
+
+# # It is sometimes useful to fine-tune packages, for example, by applying
+# # overrides. You can do that directly here, just don't forget the
+# # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+# # fonts?
+# (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+
+# # You can also create simple shell scripts directly inside your
+# # configuration. For example, this adds a command 'my-hello' to your
+# # environment:
+# (pkgs.writeShellScriptBin "my-hello" ''
+#   echo "Hello, ${config.home.username}!"
+# '')
+      ];
+
+  home.file = {
+  # ".zshrc".source = dotfiles/.zshrc;
+  ".tmux.conf".source = dotfiles/.tmux.conf;
+  ".p10k.zsh".source = dotfiles/.p10k.zsh;
+  ".gitignore".source = dotfiles/.gitignore;
+  ".config/nvim/lua".source = dotfiles/nvim/lua;
+  ".config/nvim/init.lua".source =  dotfiles/nvim/init.lua;
+  ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "/home/gustavo/.config/home-manager/dotfiles/nvim/lazy-lock.json";
+  };
+
+  # home.file."file.foo".source = config.lib.file.mkOutOfStoreSymlink ./path/to/file/to/link;
+# Home Manager can also manage your environment variables through
+# 'home.sessionVariables'. These will be explicitly sourced when using a
+# shell provided by Home Manager. If you don't want to manage your shell
+# through Home Manager then you have to manually source 'hm-session-vars.sh'
+# located at either
+#
+#  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+#
+# or
+#
+#  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
+#
+# or
+#
+#  /etc/profiles/per-user/gustavo/etc/profile.d/hm-session-vars.sh
+#
+
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
+
+
+
+
+
+
+# programs.fzf = {
+#   enable = true;
+#   keybindings = true;
+#   };
+  programs.fzf.enable = true;
+
+
+
+# Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    initExtra = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme; source ~/.p10k.zsh";
+
+    # autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+          "npm"
+          "history"
+          "node"
+          "rust"
+          "deno"
+      ];
+    };
+
+
+    shellAliases = {
+      ll = "ls -l";
+      update = "home-manager switch";
+      vi = "nvim";
+      lg="lazygit";
+      rn="ranger";
+      gc="git clone";
+      sts="shopify theme serve";
+      tx="tmuxinator";
+      c="code .";
+      neorg="cd ~/notes/ && nvim -c 'Neorg index'";
+    };
+
+    history.size = 10000;
+    history.path = "${config.xdg.dataHome}/zsh/history";
+  };
+
+  programs.neovim = {
+    enable = true;
+  };
+
+  programs.git = {
+    enable = true;
+    userName = "Gustavo";
+    userEmail = "gustavobcampos7@gmail.com";
+  };
+
+  programs.tmux = {
+    enable = true;
+  };
+
+
+
+
+
+}
+
