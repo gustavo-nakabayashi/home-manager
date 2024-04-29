@@ -8,12 +8,13 @@
 
     home.packages = with pkgs; [
       lazygit
-      nodejs
+      # nodejs
       git
       fzf
       cargo
+      mise
 
-# neovim
+	 # neovim
       fd
       ripgrep
       ranger
@@ -98,7 +99,11 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    initExtra = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme; source ~/.p10k.zsh";
+    initExtra = ''
+    source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+    source ~/.p10k.zsh
+    eval "$(~/.nix-profile/bin/mise activate zsh)"
+    '';
 
     # autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
@@ -111,6 +116,7 @@
           "node"
           "rust"
           "deno"
+          "thefuck"
       ];
     };
 
