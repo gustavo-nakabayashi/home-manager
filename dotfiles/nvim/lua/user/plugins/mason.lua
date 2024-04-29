@@ -17,6 +17,7 @@ local servers = {
   "jsonls",
   "yamlls",
   "marksman",
+  "eslint",
   -- "elixirls",
   -- "tailwindcss",
 }
