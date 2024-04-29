@@ -4,10 +4,9 @@ local M = {
   priority = 1000, -- make sure to load this before all the other start plugins
 }
 
-vim.g.solarized_contrast = false
-vim.o.background = "light"
-
 function M.config()
+  vim.g.solarized_contrast = false
+  vim.o.background = "light"
   require('solarized').set()
 end
 

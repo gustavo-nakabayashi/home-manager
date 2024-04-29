@@ -12,35 +12,34 @@ function M.config()
     symbols = { added = icons.git.LineAdded, modified = icons.git.LineModified, removed = icons.git.LineRemoved }, -- Changes the symbols used by the diff.
   }
 
-  local copilot = function()
-    local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
-    if #buf_clients == 0 then
-      return "LSP Inactive"
-    end
+  -- local copilot = function()
+  --   local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
+  --   if #buf_clients == 0 then
+  --     return "LSP Inactive"
+  --   end
+  --
+  --   local buf_client_names = {}
+  --   local copilot_active = false
+  --
+  --   for _, client in pairs(buf_clients) do
+  --     if client.name ~= "null-ls" and client.name ~= "copilot" then
+  --       table.insert(buf_client_names, client.name)
+  --     end
+  --
+  --     if client.name == "copilot" then
+  --       copilot_active = true
+  --     end
+  --   end
+  --
+  --   if copilot_active then
+  --     return "%#Copilot#" .. icons.git.Octoface .. "%*"
+  --   end
+  --   return ""
+  -- end
 
-    local buf_client_names = {}
-    local copilot_active = false
-
-    for _, client in pairs(buf_clients) do
-      if client.name ~= "null-ls" and client.name ~= "copilot" then
-        table.insert(buf_client_names, client.name)
-      end
-
-      if client.name == "copilot" then
-        copilot_active = true
-      end
-    end
-
-    if copilot_active then
-      return "%#Copilot#" .. icons.git.Octoface .. "%*"
-    end
-    return ""
-  end
-
-  local function basename(str)
-    return string.gsub(str, "(.*/)(.*)", "%2")
-  end
-
+  -- local function basename(str)
+  --   return string.gsub(str, "(.*/)(.*)", "%2")
+  -- end
 
   local function lualine_harpoon()
     local harpoon = require "harpoon"
@@ -49,37 +48,37 @@ function M.config()
 
     local s = ""
 
-    local statusline_fg = vim.api.nvim_get_hl_by_name('StatusLine', true).foreground
-    local statusline_bg = vim.api.nvim_get_hl_by_name('StatusLine', true).background
-    local lualine_a_fg = vim.api.nvim_get_hl_by_name('lualine_a_normal', true).foreground
-    local lualine_a_bg = vim.api.nvim_get_hl_by_name('lualine_a_normal', true).background
+    local statusline_fg = vim.api.nvim_get_hl_by_name("StatusLine", true).foreground
+    local statusline_bg = vim.api.nvim_get_hl_by_name("StatusLine", true).background
+    local lualine_a_fg = vim.api.nvim_get_hl_by_name("lualine_a_normal", true).foreground
+    local lualine_a_bg = vim.api.nvim_get_hl_by_name("lualine_a_normal", true).background
 
-    vim.api.nvim_set_hl(0, 'EndActive', { bg = statusline_bg, fg = lualine_a_bg })
-    vim.api.nvim_set_hl(0, 'EndInactive', { bg = statusline_bg, fg = lualine_a_fg })
+    vim.api.nvim_set_hl(0, "EndActive", { bg = statusline_bg, fg = lualine_a_bg })
+    vim.api.nvim_set_hl(0, "EndInactive", { bg = statusline_bg, fg = lualine_a_fg })
 
     for i, v in ipairs(harpoon:list().items) do
       local fn = vim.fn.fnamemodify(v.value, ":t") -- Using ':t' modifier within fnamemodify to get the basename
       if fn == currentfile then
         -- Item is active, use HarpoonActive highlight
         if i > 1 then
-          s = s .. "%#lualine_a_normal#" .. "" .. keys[i] .. " " .. fn 
+          s = s .. "%#lualine_a_normal#" .. "" .. keys[i] .. " " .. fn
         else
           s = s .. "%#lualine_a_normal#" .. " " .. keys[i] .. " " .. fn
         end
 
         if i < #harpoon:list().items then
-          s = s .. "%#lualine_b_normal#" .. "" 
+          s = s .. "%#lualine_b_normal#" .. ""
         else
-          s = s .. "%#EndActive#" .. "" 
+          s = s .. "%#EndActive#" .. ""
         end
       else
         -- Item is inactive, use HarpoonInactive highlight
         s = s .. "%#lualine_b_normal#" .. " " .. keys[i] .. " " .. fn
 
         if i >= #harpoon:list().items then
-          s = s .. "%#EndInactive#" .. "" 
+          s = s .. "%#EndInactive#" .. ""
         else
-          s = s .. " " 
+          s = s .. " "
         end
       end
     end
@@ -116,9 +115,9 @@ function M.config()
       -- lualine_y = { "filetype" },
       -- lualine_z = { "progress" },
       lualine_a = { "mode" },
-      lualine_b = { "branch", "filename" },
-      lualine_c = { diff },
-      lualine_x = { "diagnostics", copilot },
+      lualine_b = { "filename" },
+      lualine_c = { "diagnostics" },
+      lualine_x = { diff, "branch" },
       lualine_y = { "filetype" },
       lualine_z = { "progress" },
     },

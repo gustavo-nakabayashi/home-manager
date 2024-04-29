@@ -19,7 +19,7 @@ vim.opt.swapfile = false -- creates a swapfile
 vim.opt.termguicolors = true -- set term gui colors (most terminals support this)
 vim.opt.timeoutlen = 1000 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.undofile = true -- enable persistent undo
-vim.opt.updatetime = 100 -- faster completion (4000ms default)
+vim.opt.updatetime = 250 -- faster completion (4000ms default)
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
@@ -33,12 +33,12 @@ vim.opt.relativenumber = true -- set relative numbered lines
 vim.opt.numberwidth = 4 -- set number column width to 2 {default 4}
 vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 vim.opt.wrap = true -- display lines as one long line
-vim.opt.scrolloff = 0
+vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
 vim.opt.title = false
 -- colorcolumn = "80",
--- colorcolumn = "120",
+vim.g.colorcolumn = "120"
 vim.opt.fillchars = vim.opt.fillchars + "eob: "
 vim.opt.fillchars:append {
   stl = " ",
@@ -59,14 +59,6 @@ vim.opt.breakindent = true
 vim.opt.breakindentopt = "shift:2,min:40,sbr"
 vim.opt.showbreak = ">>"
 
--- vim.cmd(":set wrap")
--- vim.cmd(":set linebreak")
--- vim.cmd(":set breakindent")
--- vim.cmd(":set breakindentopt=shift:2,min:40,sbr")
--- vim.cmd(":set showbreak=>>")
-
-vim.env.PATH = "/Users/gustavo/.local/share/mise/installs/node/lts/bin/node:" .. vim.env.PATH
-
-vim.g.node_host_prog = vim.fn.expand('~/.local/share/mise/installs/node/lts/bin/node')
-
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 

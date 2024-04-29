@@ -32,6 +32,8 @@ function M.config()
         "--smart-case",
         "--hidden",
         "--glob=!.git/",
+        "--glob=!*.svg",
+        "--glob=!*.min.{css,js}",
         "--fixed-strings",
       },
 
@@ -113,19 +115,10 @@ function M.config()
         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       },
     },
+    preview = {
+      treesitter = false,
+    },
   }
 end
-
-function M.config()
-  require("telescope").setup {
-    pickers = {
-      colorscheme = {
-        enable_preview = true
-      }
-    }
-
-  }
-end
-
 
 return M

@@ -21,7 +21,7 @@ keymap("n", "<C-Space>", "<cmd>WhichKey \\<space><cr>", opts)
 -- keymap to open nvim config
 keymap("n", "<leader>lc", ":e $MYVIMRC <CR>", opts)
 
-keymap("n", "<leader>w", ":w<CR>", opts)
+keymap("n", "<leader>w", ":wa<CR>", opts)
 
 -- Normal --
 -- Resize with arrows

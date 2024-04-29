@@ -4,15 +4,15 @@ local M = {
   priority = 1000, -- make sure to load this before all the other start plugins
 }
 
-M.name = "tokyonight-storm"
 function M.config()
   require('tokyonight').setup({
     transparent = true
   })
-  local status_ok, _ = pcall(vim.cmd.colorscheme, M.name)
-  if not status_ok then
-    return
-  end
+
+  -- local status_ok, _ = pcall(vim.cmd.colorscheme, M.name)
+  -- if not status_ok then
+  --   return
+  -- end
 end
 
 return M

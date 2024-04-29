@@ -9,6 +9,7 @@ function M.config()
     ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment" },
     ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
     ["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
+    -- ["e"] = { "<cmd>Neotree toggle<CR>", "Explorer" },
     b = {
       name = "Buffers",
       b = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
@@ -46,7 +47,10 @@ function M.config()
       name = "Find",
       b = { "<cmd>Telescope buffers<cr>", "Buffers" },
       c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-      f = { "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'fd', '--type', 'f', '--hidden', '--no-require-git', '--exclude', '.git' }})<cr>", "Find files" },
+      f = {
+        "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'fd', '--type', 'f', '--hidden', '--no-require-git', '--exclude', '.git' }})<cr>",
+        "Find files",
+      },
       p = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
       t = { "<cmd>Telescope live_grep<cr>", "Find Text" },
       s = { "<cmd>Telescope grep_string<cr>", "Find String" },
@@ -84,7 +88,13 @@ function M.config()
         "Checkout commit(for current file)",
       },
       d = {
-        "<cmd>Gitsigns diffthis HEAD<cr>",
+        function()
+          if next(require("diffview.lib").views) == nil then
+            vim.cmd "DiffviewOpen"
+          else
+            vim.cmd "DiffviewClose"
+          end
+        end,
         "Git Diff",
       },
     },
