@@ -152,9 +152,8 @@
       lg="lazygit";
       rn="ranger";
       gc="git clone";
-      vi="mise x node@lts -- nvim"
-      gcm="git commit -m"
-
+      vi="mise x node@lts -- nvim";
+      gcm="git commit -m";
       sts="shopify theme serve";
       tx="tmuxinator";
       c="code .";
