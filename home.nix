@@ -75,9 +75,7 @@
       ];
 
   home.file = {
-  # ".zshrc".source = dotfiles/.zshrc;
   ".tmux.conf".source = dotfiles/.tmux.conf;
-  # ".config/tmux/tmux.conf".source = dotfiles/.tmux.conf;
   ".p10k.zsh".source = dotfiles/.p10k.zsh;
   ".gitignore".source = dotfiles/.gitignore;
   ".config/nvim/lua".source = dotfiles/nvim/lua;
@@ -132,7 +130,7 @@
     eval "$(~/.nix-profile/bin/mise activate zsh)"
     '';
 
-    # autosuggestion.enable = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     oh-my-zsh = {
       enable = true;
@@ -151,10 +149,12 @@
     shellAliases = {
       ll = "ls -l";
       update = "home-manager switch";
-      vi = "nvim";
       lg="lazygit";
       rn="ranger";
       gc="git clone";
+      vi="mise x node@lts -- nvim"
+      gcm="git commit -m"
+
       sts="shopify theme serve";
       tx="tmuxinator";
       c="code .";
