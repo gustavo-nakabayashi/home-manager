@@ -13,6 +13,7 @@
       fzf
       cargo
       mise
+      thefuck
 
 	 # neovim
       fd
@@ -40,17 +41,43 @@
 # # fonts?
 # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
+
 # # You can also create simple shell scripts directly inside your
 # # configuration. For example, this adds a command 'my-hello' to your
 # # environment:
-# (pkgs.writeShellScriptBin "my-hello" ''
-#   echo "Hello, ${config.home.username}!"
-# '')
+
+(pkgs.writeShellScriptBin "tmux-sessionizer" ''
+  if [[ $# -eq 1 ]]; then
+      selected=$1
+  else
+      selected=$({ find ~/Programs/video-peel  ~/Programs   -mindepth 1 -maxdepth 1 -type d; echo ~/.config/home-manager; }| fzf)
+  fi
+
+  if [[ -z $selected ]]; then
+      exit 0
+  fi
+
+  selected_name=$(basename "$selected" | tr . _)
+  tmux_running=$(pgrep tmux)
+
+  if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+      tmux new-session -s $selected_name -c $selected
+      exit 0
+  fi
+
+  if ! tmux has-session -t=$selected_name 2> /dev/null; then
+      tmux new-session -ds $selected_name -c $selected
+  fi
+
+  tmux switch-client -t $selected_name
+
+'')
       ];
 
   home.file = {
   # ".zshrc".source = dotfiles/.zshrc;
   ".tmux.conf".source = dotfiles/.tmux.conf;
+  # ".config/tmux/tmux.conf".source = dotfiles/.tmux.conf;
   ".p10k.zsh".source = dotfiles/.p10k.zsh;
   ".gitignore".source = dotfiles/.gitignore;
   ".config/nvim/lua".source = dotfiles/nvim/lua;
@@ -150,6 +177,16 @@
 
   programs.tmux = {
     enable = true;
+    sensibleOnTop = false;
+
+
+    extraConfig = ''
+      # Either source another config file, you push as a managed home-manager file (see xdg.Configfile)
+      source-file ~/.tmux.conf
+      
+      # our just specify your tmux config here, if you like embedding config in nix.
+      # .....
+    '';
   };
 
 
