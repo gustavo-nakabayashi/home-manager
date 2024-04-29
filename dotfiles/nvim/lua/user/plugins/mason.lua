@@ -6,7 +6,7 @@ local M = {
   },
 }
 
-M.servers = {
+local servers = {
   "lua_ls",
   "cssls",
   "html",
@@ -28,7 +28,7 @@ function M.config()
     },
   }
   require("mason-lspconfig").setup {
-    ensure_installed = M.servers,
+    ensure_installed = servers,
   }
 end
 

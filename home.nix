@@ -15,7 +15,7 @@
       mise
       thefuck
 
-	 # neovim
+	  neovim
       fd
       ripgrep
       ranger
@@ -164,9 +164,6 @@
     history.path = "${config.xdg.dataHome}/zsh/history";
   };
 
-  programs.neovim = {
-    enable = true;
-  };
 
   programs.git = {
     enable = true;
