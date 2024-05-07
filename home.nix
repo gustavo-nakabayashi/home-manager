@@ -14,12 +14,15 @@
       cargo
       mise
       thefuck
+      btop
 
 	  neovim
       fd
       ripgrep
       ranger
       zsh-powerlevel10k
+      ncdu
+      tmuxinator
 
 
 # builds

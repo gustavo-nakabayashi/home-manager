@@ -16,7 +16,7 @@ function M.config()
       formatting.stylua,
       -- formatting.eslint,
       formatting.prettier.with {
-        extra_filetypes = { "toml", "liquid" },
+        extra_filetypes = { "toml", "liquid", "typescriptreact" },
       },
       formatting.black.with { extra_args = { "--fast" } },
       formatting.google_java_format,
