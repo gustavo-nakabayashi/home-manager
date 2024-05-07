@@ -40,6 +40,7 @@ spec "user.plugins.colorscheme-tokyonight"
 -- spec "user.plugins.neogit"
 spec "user.plugins.gitblame"
 spec "user.plugins.gitsigns"
+spec "user.plugins.lazygit"
 
 ---- UI
 -- spec "user.plugins.breadcrumbs"

@@ -1,7 +1,7 @@
 local M = {
  'folke/trouble.nvim',
   event = "VeryLazy",
-  branch = "dev",
+  branch = "main",
 }
 
 return M

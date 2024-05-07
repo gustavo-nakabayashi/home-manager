@@ -128,7 +128,7 @@ function M.config()
 
     t = {
       name = "Trouble",
-      t = { "<cmd>Trouble diagnostics toggle<cr>", "Document Symbols" },
+      t = { "<cmd>TroubleToggle<cr>", "Document Symbols" },
     },
 
     T = {
