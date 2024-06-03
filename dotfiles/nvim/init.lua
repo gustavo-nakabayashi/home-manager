@@ -31,8 +31,8 @@ spec "user.plugins.treesitter"
 -- spec "user.plugins.colorscheme-vim-colors"
 -- spec "user.plugins.colorscheme-vivid"
 spec "user.plugins.colorscheme-gruvbox"
-spec "user.plugins.colorscheme-nightfox"
-spec "user.plugins.colorscheme-solarized"
+-- spec "user.plugins.colorscheme-nightfox"
+-- spec "user.plugins.colorscheme-solarized"
 spec "user.plugins.colorscheme-tokyonight"
 
 -- Git
@@ -45,7 +45,7 @@ spec "user.plugins.lazygit"
 ---- UI
 -- spec "user.plugins.breadcrumbs"
 -- spec "user.plugins.colorizer"
--- spec "user.plugins.lualine"
+spec "user.plugins.lualine" -- not the leak
 -- spec "user.plugins.navic"
 -- spec "user.plugins.zen-mode"
 spec "user.plugins.devicons"
@@ -60,7 +60,7 @@ spec "user.plugins.nvimtree"
 spec "user.plugins.telescope"
 
 ---- Utils
--- spec "user.plugins.auto-save"
+spec "user.plugins.auto-save"
 -- spec "user.plugins.autopairs"
 -- spec "user.plugins.quickfix-reflector"
 -- spec "user.plugins.repeat"
@@ -74,7 +74,7 @@ spec "user.plugins.undotree"
 spec "user.plugins.visual-star-search"
 
 ---- Motions or actions, textobjects/ vim enhancing features
--- spec "user.plugins.targets"
+spec "user.plugins.targets"
 spec "user.plugins.comment"
 spec "user.plugins.textobj-user"
 spec "user.plugins.textobj-user-entire"

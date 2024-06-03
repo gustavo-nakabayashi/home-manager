@@ -8,8 +8,6 @@
 
     home.packages = with pkgs; [
       lazygit
-      # nodejs
-      git
       fzf
       cargo
       mise
@@ -23,6 +21,10 @@
       zsh-powerlevel10k
       ncdu
       tmuxinator
+      xclip
+      tmux-mem-cpu-load
+      unzip
+
 
 
 # builds

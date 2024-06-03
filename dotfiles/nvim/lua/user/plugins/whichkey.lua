@@ -63,11 +63,13 @@ function M.config()
       R = { "<cmd>Telescope registers<cr>", "Registers" },
       k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
       C = { "<cmd>Telescope commands<cr>", "Commands" },
+      g = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "RipGrep" },
+      w = { "<cmd>lua require 'telescope-live-grep-args.shortcuts'.grep_word_under_cursor()<cr>", "RipGrep" },
     },
 
     g = {
       name = "Git",
-      g = { "<cmd>Neogit<cr>", "Neogit" },
+      g = { "<cmd>LazyGit<cr>", "LazyGit" },
       j = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
       k = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
       l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
@@ -153,6 +155,10 @@ function M.config()
     l = {
       name = "LSP",
       a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    },
+    f = {
+      name = "Telescope",
+      w = { "<cmd>lua require 'telescope-live-grep-args.shortcuts'.grep_visual_selection()<cr>", "Find selected" },
     },
   }
 
