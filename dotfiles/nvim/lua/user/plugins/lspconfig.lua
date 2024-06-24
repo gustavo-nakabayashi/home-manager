@@ -88,7 +88,8 @@ function M.config()
     "lua_ls",
     "cssls",
     "html",
-    -- "tsserver", using typescript tools
+    -- "tsserver",-- using typescript tools
+    "vtsls",
     -- "astro",
     -- "pyright",
     "eslint",
