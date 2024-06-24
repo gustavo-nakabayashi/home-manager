@@ -24,6 +24,7 @@
       xclip
       tmux-mem-cpu-load
       unzip
+      awscli2
 
 
 
