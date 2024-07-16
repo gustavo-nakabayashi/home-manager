@@ -29,7 +29,7 @@ function M.config()
 
 ---@diagnostic disable-next-line: missing-fields
   require("nvim-treesitter.configs").setup {
-    ensure_installed = { "lua", "markdown", "markdown_inline", "bash", "python", "typescript", "javascript" }, -- put the language you want in this array
+    ensure_installed = { "lua", "markdown", "vimdoc", "luadoc", "vim", "markdown_inline", "bash", "python", "typescript", "javascript" }, -- put the language you want in this array
     ignore_install = { "" },
     sync_install = false,
     highlight = {
