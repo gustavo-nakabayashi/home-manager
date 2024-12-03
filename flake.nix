@@ -26,7 +26,7 @@
         };
       });
 
-      "username@your-mac" = home-manager.lib.homeManagerConfiguration ({
+      "gustavo@Gustavos-MacBook-Pro" = home-manager.lib.homeManagerConfiguration ({
         modules = [ (import ./home.nix) ];
         pkgs = import nixpkgs {
           # system = "aarch64-darwin";   ## For M1/M2/etc Apple Silicon

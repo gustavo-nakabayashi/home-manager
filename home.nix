@@ -2,7 +2,7 @@
 
 {
   home.username = "gustavo";
-  home.homeDirectory = "/home/gustavo";
+  home.homeDirectory = "/Users/gustavo";
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
@@ -25,6 +25,7 @@
       tmux-mem-cpu-load
       unzip
       awscli2
+      jq
 
 
 
