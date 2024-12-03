@@ -28,6 +28,7 @@
       unzip
       awscli2
       jq
+      sops
 
 
 

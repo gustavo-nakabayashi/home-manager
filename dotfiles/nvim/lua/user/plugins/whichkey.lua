@@ -94,6 +94,7 @@ function M.config()
     { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols" },
     { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },
     { "<leader>le", "<cmd>Telescope quickfix<cr>", desc = "Telescope Quickfix" },
+    { "<leader>lR", "<cmd>LspRestart<cr>", desc = "LSP Restart" },
 
     { "<leader>t", group = "Trouble" },
     { "<leader>tt", "<cmd>TroubleToggle<cr>", desc = "Document Symbols" },
