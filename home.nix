@@ -13,6 +13,8 @@
       mise
       thefuck
       btop
+      mosh
+      autossh
 
 	  neovim
       fd
