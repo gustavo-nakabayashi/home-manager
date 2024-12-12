@@ -18,21 +18,35 @@
 
   outputs = { self, nixpkgs, home-manager }: {
     homeConfigurations = {
-      "gustavo@devserver" = home-manager.lib.homeManagerConfiguration ({
-        modules = [ (import ./home.nix) ];
+      "gustavo@devserver" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           system = "x86_64-linux";
-          # config.allowUnfree = true;
         };
-      });
-
-      "gustavo@Gustavos-MacBook-Pro" = home-manager.lib.homeManagerConfiguration ({
-        modules = [ (import ./home.nix) ];
+        modules = [
+          ./home.nix
+          {
+            home = {
+              username = "gustavo";
+              homeDirectory = "/home/gustavo";
+            };
+          }
+        ];
+      };
+      
+      "gustavo@Gustavos-MacBook-Pro" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
-          # system = "aarch64-darwin";   ## For M1/M2/etc Apple Silicon
-          system = "x86_64-darwin";
+          system = "aarch64-darwin";
         };
-      });
+        modules = [
+          ./home.nix
+          {
+            home = {
+              username = "gustavo";
+              homeDirectory = "/Users/gustavo";
+            };
+          }
+        ];
+      };
     };
   };
 }

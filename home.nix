@@ -1,14 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "gustavo";
-  home.homeDirectory = "/Users/gustavo";
-
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
     home.packages = with pkgs; [
       lazygit
-      fzf
       cargo
       mise
       thefuck
@@ -60,7 +56,7 @@
   if [[ $# -eq 1 ]]; then
       selected=$1
   else
-      selected=$({ find ~/Programs/video-peel  ~/Programs   -mindepth 1 -maxdepth 1 -type d; echo ~/.config/home-manager; }| fzf)
+      selected=$({ find ~/Programs/video-peel  ~/Programs ~/csprimer   -mindepth 1 -maxdepth 1 -type d; echo ~/.config/home-manager; }| fzf)
   fi
 
   if [[ -z $selected ]]; then
@@ -82,6 +78,23 @@
   tmux switch-client -t $selected_name
 
 '')
+
+(pkgs.writeShellScriptBin "remote-sync" ''
+  # Sync the current directory
+
+  rsync -vhra \
+      "$(pwd)" \
+      "gustavo@192.168.0.11:$(echo "''${PWD%/*}" | sed "s|$HOME|~|")" \
+      --exclude "node_modules" \
+      --exclude ".git" \
+      --include="**.gitignore"  \
+      --filter=":- .gitignore"
+
+
+  # Exit with rsync's status code
+  exit $?
+'')
+
       ];
 
   home.file = {
@@ -90,7 +103,7 @@
   ".gitignore".source = dotfiles/.gitignore;
   ".config/nvim/lua".source = dotfiles/nvim/lua;
   ".config/nvim/init.lua".source =  dotfiles/nvim/init.lua;
-  ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "/home/gustavo/.config/home-manager/dotfiles/nvim/lazy-lock.json";
+  ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/nvim/lazy-lock.json";
   };
 
   # home.file."file.foo".source = config.lib.file.mkOutOfStoreSymlink ./path/to/file/to/link;
@@ -125,7 +138,10 @@
 #   enable = true;
 #   keybindings = true;
 #   };
-  programs.fzf.enable = true;
+  programs.fzf = {
+    enable = true;
+    defaultCommand = "fd";
+  };
 
 
 
@@ -138,6 +154,20 @@
     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
     source ~/.p10k.zsh
     eval "$(~/.nix-profile/bin/mise activate zsh)"
+
+    export FZF_DEFAULT_COMMAND="fd"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+
+
+    function y() {
+      local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+      yazi "$@" --cwd-file="$tmp"
+      if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+      fi
+      rm -f -- "$tmp"
+    }
     '';
 
     autosuggestion.enable = true;
@@ -177,9 +207,37 @@
 
   programs.git = {
     enable = true;
-    userName = "Gustavo";
+    userName = "Gustavo Campos";
     userEmail = "gustavobcampos7@gmail.com";
+    
+    includes = [
+      {
+        condition = "gitdir:~/Programs/video-peel/";
+        contents = {
+          user = {
+            email = "gustavo@videopeel.com";
+            name = "Gustavo Campos";
+          };
+        };
+      }
+    ];
+
+    extraConfig = {
+      pull.ff = "only";
+      init.defaultBranch = "main";
+      
+      filter.lfs = {
+        process = "git-lfs filter-process";
+        required = true;
+        clean = "git-lfs clean -- %f";
+        smudge = "git-lfs smudge -- %f";
+      };
+      
+      core.excludesFile = "~/.gitignore";
+      push.autoSetupRemote = true;
+    };
   };
+
 
   programs.tmux = {
     enable = true;

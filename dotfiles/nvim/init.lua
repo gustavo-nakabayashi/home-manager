@@ -25,6 +25,7 @@ spec "user.plugins.indentline"
 -- spec "user.plugins.zen-mode"
 spec "user.plugins.devicons"
 spec "user.plugins.whichkey"
+spec "user.plugins.no-neck"
 
 spec "user.plugins.autoread"
 
@@ -86,5 +87,6 @@ spec "user.plugins.comment"
 spec "user.plugins.textobj-user"
 spec "user.plugins.textobj-user-entire"
 spec "user.plugins.nvim-surround"
+
 
 require "user.lazy"
