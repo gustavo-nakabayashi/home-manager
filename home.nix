@@ -11,6 +11,7 @@
       btop
       mosh
       autossh
+      terraform
 
 	  neovim
       fd
@@ -190,7 +191,7 @@
       ll = "ls -l";
       update = "home-manager switch";
       lg="lazygit";
-      rn="ranger";
+      rn="y";
       gc="git clone";
       vi="mise x node@lts -- nvim";
       gcm="git commit -m";
