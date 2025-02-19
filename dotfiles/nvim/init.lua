@@ -8,7 +8,7 @@ require "options"
 -- spec "user.plugins.bufferline"
 -- spec "user.plugins.copilot"
 -- spec "user.plugins.lsp-timeout"
--- spec "user.plugins.matchup"
+spec "user.plugins.matchup"
 
 
 spec "user.plugins.lualine"
@@ -19,7 +19,7 @@ spec "user.plugins.indentline"
 
 -- Aparently none of these are the leak
 ---- UI
--- spec "user.plugins.breadcrumbs"
+spec "user.plugins.breadcrumbs"
 -- spec "user.plugins.colorizer"
 -- spec "user.plugins.navic"
 -- spec "user.plugins.zen-mode"
@@ -30,8 +30,8 @@ spec "user.plugins.no-neck"
 spec "user.plugins.autoread"
 
 ---- Treesitter
--- spec "user.plugins.illuminate"
--- spec "user.plugins.treesitter-context"
+spec "user.plugins.illuminate"
+spec "user.plugins.treesitter-context"
 spec "user.plugins.treesitter"
 
 
