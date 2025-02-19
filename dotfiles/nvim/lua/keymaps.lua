@@ -91,3 +91,13 @@ keymap("n", "<leader>j", "<cmd>lnext<CR>zz")
 keymap("n", "<leader>k", "<cmd>lprev<CR>zz")
 
 keymap("n", "<leader>r", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+
+-- Make all searches very magic by default
+keymap("n", "/", "/\\v", { silent = false })
+keymap("n", "?", "?\\v", { silent = false })
+keymap("v", "/", "/\\v", { silent = false })
+keymap("v", "?", "?\\v", { silent = false })
+
+-- If you want to also make substitutions very magic by default
+keymap("n", ":%s/", ":%s/\\v", { silent = false })
+keymap("n", ":s/", ":s/\\v", { silent = false })

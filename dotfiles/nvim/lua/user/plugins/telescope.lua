@@ -29,20 +29,18 @@ function M.config()
       layout_strategy = nil,
       layout_config = {},
       vimgrep_arguments = {
-        "rg",
-        "--color=never",
-        "--no-heading",
-        "--with-filename",
-        "--line-number",
-        "--column",
-        "--smart-case",
-        "--hidden",
-        "--glob=!.git/",
-        "--glob=!*.svg",
-        "--glob=!*.min.{css,js}",
-        "--fixed-strings",
+        "rg",                    -- Use ripgrep as the search tool
+        "--color=never",         -- Disable ANSI color codes in output
+        "--no-heading",         -- Don't group matches by file (each match on its own line)
+        "--with-filename",      -- Show file name for each match
+        "--line-number",        -- Show line number for each match
+        "--column",            -- Show column number for each match
+        "--smart-case",        -- Smart case searching: case-insensitive unless pattern has uppercase
+        "--hidden",            -- Search hidden files (but still respect .gitignore)
+        "--glob=!.git/",       -- Exclude .git directory from search
+        "--glob=!*.svg",       -- Exclude SVG files from search
+        "--glob=!*.min.{css,js}", -- Exclude minified CSS and JS files
       },
-
       mappings = {
         i = {
           ["<C-j>"] = actions.move_selection_next,
