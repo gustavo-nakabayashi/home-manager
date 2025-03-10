@@ -49,6 +49,23 @@
           }
         ];
       };
+      
+      # Add an alias for the same configuration without hostname
+      "gustavo" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "aarch64-darwin";
+          config.allowUnfree = true;
+        };
+        modules = [
+          ./home.nix
+          {
+            home = {
+              username = "gustavo";
+              homeDirectory = "/Users/gustavo";
+            };
+          }
+        ];
+      };
     };
   };
 }
