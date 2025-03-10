@@ -152,6 +152,10 @@
     enable = true;
     enableCompletion = true;
     initExtra = ''
+    if [ -f ~/.secret-env ]; then
+      source ~/.secret-env
+    fi
+
     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
     source ~/.p10k.zsh
     eval "$(~/.nix-profile/bin/mise activate zsh)"
