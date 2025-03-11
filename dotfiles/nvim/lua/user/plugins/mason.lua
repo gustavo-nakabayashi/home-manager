@@ -7,20 +7,23 @@ local M = {
 }
 
 local servers = {
-  "lua_ls",
-  "cssls",
-  "html",
-  -- "tsserver",
-  "vtsls",
-  -- "astro",
-  -- "pyright",
-  "bashls",
-  "jsonls",
-  "yamlls",
-  "marksman",
-  "eslint",
-  -- "elixirls",
-  -- "tailwindcss",
+    "bashls",
+    "clangd",
+    "cssls",
+    "eslint",
+    "gopls",
+    "html",
+    "jsonls",
+    "lua_ls",
+    "marksman",
+    "terraformls",
+    "vtsls",
+    "yamlls",
+    -- "astro",
+    -- "elixirls",
+    -- "pyright",
+    -- "tailwindcss",
+    -- "tsserver",
 }
 
 -- Remove doubled react node defitions
