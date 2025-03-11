@@ -118,6 +118,11 @@ function M.config()
       "<cmd>lua require 'telescope-live-grep-args.shortcuts'.grep_visual_selection()<cr>",
       desc = "Find selected",
     },
+    {
+      "<leader>cn",
+      ":<C-u>'<,'>PrtChatNew<cr>",
+      desc = "New AI chat",
+    },
   }
 
   local which_key = require "which-key"

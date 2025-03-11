@@ -2,7 +2,6 @@ require "autocmds"
 require "keymaps"
 require "launch"
 require "options"
-
 -- spec "user.plugins.alpha"
 -- spec "user.plugins.bufdelete"
 -- spec "user.plugins.bufferline"
@@ -87,6 +86,8 @@ spec "user.plugins.comment"
 spec "user.plugins.textobj-user"
 spec "user.plugins.textobj-user-entire"
 spec "user.plugins.nvim-surround"
+
+spec "user.plugins.parrot"
 
 
 require "user.lazy"

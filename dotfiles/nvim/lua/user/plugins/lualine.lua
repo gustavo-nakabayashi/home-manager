@@ -40,6 +40,17 @@ function M.config()
   -- local function basename(str)
   --   return string.gsub(str, "(.*/)(.*)", "%2")
   -- end
+    -- define function and formatting of the information
+  local function parrot_status()
+    local status_info = require("parrot.config").get_status_info()
+    local status = ""
+    if status_info.is_chat then
+      status = status_info.prov.chat.name
+    else
+      status = status_info.prov.command.name
+    end
+    return string.format("%s(%s)", status, status_info.model)
+  end
 
   local function lualine_harpoon()
     local harpoon = require "harpoon"
@@ -114,7 +125,7 @@ function M.config()
       -- lualine_x = { copilot },
       -- lualine_y = { "filetype" },
       -- lualine_z = { "progress" },
-      lualine_a = { "mode" },
+      lualine_a = { "mode", parrot_status },
       lualine_b = { "filename" },
       lualine_c = { "diagnostics" },
       lualine_x = { diff, "branch" },
