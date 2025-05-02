@@ -88,6 +88,7 @@ spec "user.plugins.textobj-user-entire"
 spec "user.plugins.nvim-surround"
 
 spec "user.plugins.parrot"
+spec "user.plugins.outline"
 
 
 require "user.lazy"
