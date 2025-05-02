@@ -163,6 +163,7 @@
     export FZF_DEFAULT_COMMAND="fd"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+    export PATH="/Users/gustavo/.local/bin:$PATH"
 
 
     function y() {
