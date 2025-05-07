@@ -57,7 +57,7 @@
   if [[ $# -eq 1 ]]; then
       selected=$1
   else
-      selected=$({ find ~/Programs/video-peel  ~/Programs ~/csprimer   -mindepth 1 -maxdepth 1 -type d; echo ~/.config/home-manager; }| fzf)
+      selected=$({ find ~/Programs/video-peel ~/.config ~/Programs ~/Programs/bridge ~/csprimer    -mindepth 1 -maxdepth 1 -type d; }| fzf)
   fi
 
   if [[ -z $selected ]]; then
