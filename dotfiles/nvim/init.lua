@@ -25,6 +25,7 @@ spec "user.plugins.breadcrumbs"
 spec "user.plugins.devicons"
 spec "user.plugins.whichkey"
 spec "user.plugins.no-neck"
+-- spec "user.plugins.noice"
 
 spec "user.plugins.autoread"
 
@@ -68,6 +69,7 @@ spec "user.plugins.lazygit"
 spec "user.plugins.harpoon"
 spec "user.plugins.nvimtree"
 spec "user.plugins.telescope"
+spec "user.plugins.snipe"
 
 -- ---- Utils
 spec "user.plugins.auto-save"
