@@ -66,7 +66,7 @@ spec "user.plugins.lazygit"
 
 -- ---- Files/navigation
 -- -- spec "user.plugins.neotree"
-spec "user.plugins.harpoon"
+-- spec "user.plugins.harpoon"
 spec "user.plugins.nvimtree"
 spec "user.plugins.telescope"
 spec "user.plugins.snipe"
