@@ -1,5 +1,6 @@
 local M = {
   "williamboman/mason-lspconfig.nvim",
+  branch = "v1.x",
   dependencies = {
     "williamboman/mason.nvim",
     "nvim-lua/plenary.nvim",
