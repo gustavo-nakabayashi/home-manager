@@ -40,7 +40,7 @@ function M.config()
   -- local function basename(str)
   --   return string.gsub(str, "(.*/)(.*)", "%2")
   -- end
-    -- define function and formatting of the information
+  -- define function and formatting of the information
   local function parrot_status()
     local status_info = require("parrot.config").get_status_info()
     local status = ""
@@ -111,12 +111,13 @@ function M.config()
     },
     tabline = {
 
-      lualine_a = { lualine_harpoon },
-      lualine_b = {},
-      lualine_c = {},
-      lualine_x = {},
-      lualine_y = {},
-      lualine_z = {},
+      -- lualine_a = { lualine_harpoon },
+      -- lualine_a = {},
+      -- lualine_b = {},
+      -- lualine_c = {},
+      -- lualine_x = {},
+      -- lualine_y = {},
+      -- lualine_z = {},
     },
     sections = {
       -- lualine_a = { {"branch", icon =""} },
