@@ -39,7 +39,7 @@ spec "user.plugins.treesitter"
 -- ---- LSP
 -- -- spec "user.plugins.neorg"
 spec "user.plugins.cmp"
-spec "user.plugins.lspconfig"
+-- spec "user.plugins.lspconfig"
 spec "user.plugins.mason"
 spec "user.plugins.null-ls"
 -- -- spec "user.plugins.typescript-tools"
