@@ -91,6 +91,7 @@ spec "user.plugins.nvim-surround"
 
 spec "user.plugins.parrot"
 spec "user.plugins.outline"
+spec "user.plugins.oil-nvim"
 
 
 require "user.lazy"
