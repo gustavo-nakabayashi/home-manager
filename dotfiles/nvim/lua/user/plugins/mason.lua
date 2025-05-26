@@ -18,13 +18,13 @@ local servers = {
   "lua_ls",
   "marksman",
   "terraformls",
-  "vtsls",
+  -- "vtsls",
   "yamlls",
   -- "astro",
   -- "elixirls",
   -- "pyright",
   -- "tailwindcss",
-  -- "tsserver",
+  "tsserver",
 }
 
 -- Remove doubled react node defitions
