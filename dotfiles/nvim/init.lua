@@ -42,7 +42,7 @@ spec "user.plugins.cmp"
 -- spec "user.plugins.lspconfig"
 spec "user.plugins.mason"
 spec "user.plugins.null-ls"
--- -- spec "user.plugins.typescript-tools"
+-- spec "user.plugins.typescript-tools"
 spec "user.plugins.trouble"
 
 

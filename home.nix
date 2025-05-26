@@ -156,7 +156,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    initExtra = ''
+    initContent = ''
     if [ -f ~/.secret-env ]; then
       source ~/.secret-env
     fi
