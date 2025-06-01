@@ -112,6 +112,13 @@
     source = dotfiles;
     recursive = true;
   };
+  ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/nvim/lazy-lock.json";
+  };
+
+  # home.file.".config" = {
+  #   source = ./dotfiles;
+  #   recursive = true;
+  # };
 
   # home.file."file.foo".source = config.lib.file.mkOutOfStoreSymlink ./path/to/file/to/link;
 # Home Manager can also manage your environment variables through
@@ -168,7 +175,7 @@
     fi
 
     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-    source ~/.p10k.zsh
+    source ~/.config/.p10k.zsh
     eval "$(~/.nix-profile/bin/mise activate zsh)"
 
     export FZF_DEFAULT_COMMAND="fd"

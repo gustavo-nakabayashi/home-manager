@@ -1,0 +1,14 @@
+# /Users/gustavo/.config/tmuxinator/videopeel-web-api.yml
+
+name: videopeel-web-api
+root: ~/Programs/video-peel/videopeel-web-api
+
+windows:
+  - editor: vi
+  - git: lg
+  - server: 
+      layout: main-vertical
+      panes:
+        - docker compose up
+        - until npm run dev:watch; do sleep 5; done
+

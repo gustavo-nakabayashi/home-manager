@@ -1,0 +1,31 @@
+theme = tokyonight
+background = 000000
+macos-titlebar-style = hidden
+
+# theme = dark:tokyonight,light:GruvboxLight
+
+
+window-padding-x = 0
+window-padding-y = 0
+
+keybind = super+one=text:\x00\x31
+keybind = super+two=text:\x00\x32
+keybind = super+three=text:\x00\x33
+keybind = super+four=text:\x00\x34
+keybind = super+five=text:\x00\x35
+
+background-opacity = 0.75
+background-blur-radius = 20
+
+window-padding-color = extend-always
+
+
+font-size = 20
+font-family = Comic Code Ligatures
+font-style = Medium
+# font-style-bold = Bold
+# font-style-italic
+# font-style-bold-italic
+
+adjust-cell-height = 6
+cursor-style = block_hollow
