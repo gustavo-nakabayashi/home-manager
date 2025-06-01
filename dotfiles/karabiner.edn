@@ -1,1 +1,95 @@
-../dotfiles/.config/karabiner.edn
+{
+ :simlayers {
+             :period-mode {:key :period}
+             :comma-mode {:key :comma}
+             }
+ :main [
+        {:des "caps_lock" :rules [ [:##caps_lock :left_control nil {:alone :escape}] ]}
+
+        {:des "Comma Mode [,] as Trigger Key"
+         :rules [:comma-mode
+                 [:a :open_bracket]
+                 [:s :close_bracket]
+                 [:d :!S9]
+                 [:f :!S0]
+                 [:e :!Sopen_bracket]
+                 [:r :!Sclose_bracket]
+                 ]}
+
+        ]
+
+ ; the default value is 250
+ :simlayer-threshold 500
+
+ ; :devices {:macbook-internal [{:product_id 834 :vendor_id 1452}]
+ ;           :logitech-k860 [{:vendor_id 1133 :product_id 50475}]}
+
+ :applications {:Terminals ["^com\\.apple\\.Terminal$"
+                            "^com\\.googlecode\\.iterm2$"]}
+}
+
+; {;       
+;  :default true
+;  :alone 500
+;  :delay 200
+;  :held 500
+;  :simlayer-threshold 200
+;  :simlayers {:spacebar-mode {:key :semicolon}}
+;  :main [
+;         {:des "spacebar"
+;          :rules [:spacebar-mode
+;                  ;symbols [](){}<>
+;                  [:a :open_bracket]
+;                  [:s :close_bracket]
+;                  [:d :!S9]
+;                  [:f :!S0]
+;                  [:e :!Sopen_bracket]
+;                  [:r :!Sclose_bracket]
+;                  [:h :delete_or_backspace]
+;         ]}
+;         {:des "caps_lock" :rules [[:##caps_lock :left_control nil {:alone :escape}]]}
+;         {:des "hyper 1 to cleanup personal folder"
+;              :rules [
+;                [:!T1 "open -a 'Google Chrome'"]
+;                [:!T2 "open -a 'WezTerm'"]
+;                [:!T3 "open -a 'Notion'"]
+;                [:!T4 "open -a 'Slack'"]
+;                [:!T5 "open -a 'Discord'"]
+;                [:!T8 "open -a 'Spotify'"]
+;              ]
+;        }
+;         ;
+; ]}
+
+;; rule [:period ["media-mode" 1] nil {:afterup ["media-mode" 0] :alone :period}]
+;;       |_____| |_______________| |_| |_________________________________________|
+;;        <from>    <to>      <conditions>         <other options>
+
+    ;; !  | means mandatory
+    ;; #  | means optional
+    ;; C  | left_command
+    ;; T  | left_control
+    ;; O  | left_option
+    ;; S  | left_shift
+    ;; F  | fn
+    ;; Q  | right_command
+    ;; W  | left_control
+    ;; E  | right_option
+    ;; R  | right_shift
+    ;; 
+    ;; !! | mandatory command + control + optional + shift (hyper)
+    ;; ## | optional any
+;;
+    ;; examples
+
+    ;; !CTSequal_sign  | mandatory command control shift =
+    ;;                 | which is command control +
+    ;; !O#Sright_arrow | mandatory option optional any right_arrow
+
+    ;; karabiner definition of mandatory and optional
+    ;; https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/from/modifiers/
+
+    ;; rule [<from> <to>]
+    ;; if simplified modifier is used in <to>, optional(#) definition will be
+    ;; ignored.
+

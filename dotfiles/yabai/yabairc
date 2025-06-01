@@ -1,1 +1,67 @@
-../../dotfiles/.config/yabai/yabairc
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+yabai -m config layout bsp
+
+yabai -m config window_placement second_child
+
+yabai -m config top_padding 12
+yabai -m config bottom_padding 12
+yabai -m config left_padding 12
+yabai -m config right_padding 12
+yabai -m config window_gap 12
+
+# mouse settings
+
+# yabai -m config mouse_follows_focus on
+yabai -m config mouse_modifier alt
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
+# yabai -m config focus_follows_mouse  autofocus
+
+# yabai -m mouse_drop_action swap
+
+# yabai -m rule --add app="^" space=^3
+
+# apps to not manage (ignore)
+yabai -m rule --add app="^System Settings$" manage=off sticky=on
+yabai -m rule --add app="^Archive Utility$" manage=off sticky=on
+yabai -m rule --add app="^Creative Cloud$" manage=off
+yabai -m rule --add app="^Logi Options$" manage=off
+yabai -m rule --add app="^Music$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off sticky=on
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off sticky=on
+yabai -m rule --add app="^Steam Helper$" manage=off
+yabai -m rule --add app="^XCOM 2$" manage=off
+yabai -m rule --add app="^Finder$" manage=off sticky=on
+yabai -m rule --add app="^Digital Color Meter$" manage=off sticky=on
+
+# yabai -m config external_bar all:0:0
+
+# modify window shadows (default: on, options: on, off, float)
+# example: show shadows only for floating windows
+# yabai -m config window_shadow float
+
+
+
+yabai -m rule --add app="^Google Chrome$" space=^1
+yabai -m rule --add app="^Arc$" space=^1
+
+yabai -m rule --add app="^WezTerm$" space=^2
+yabai -m rule --add app="^Alacritty$" space=^2
+yabai -m rule --add app="^iTerm$" space=^2
+yabai -m rule --add app="^Ghostty$" space=^2
+
+yabai -m rule --add app="^Slack$" space=^3
+yabai -m rule --add app="^Discord$" space=^3
+yabai -m rule --add app="^Spotify$" space=^3
+
+yabai -m rule --add app="^Notion Calendar$" space=^5
+
+yabai -m config --space 3 layout stack
+
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"

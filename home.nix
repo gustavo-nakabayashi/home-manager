@@ -13,7 +13,7 @@
       autossh
       terraform
 
-	  neovim
+      neovim
       fd
       ripgrep
       ranger
@@ -80,22 +80,6 @@
 
 '')
 
-(pkgs.writeShellScriptBin "remote-sync" ''
-  # Sync the current directory
-
-  rsync -vhra \
-      "$(pwd)" \
-      "gustavo@192.168.0.11:$(echo "''${PWD%/*}" | sed "s|$HOME|~|")" \
-      --exclude "node_modules" \
-      --exclude ".git" \
-      --include="**.gitignore"  \
-      --filter=":- .gitignore"
-
-
-  # Exit with rsync's status code
-  exit $?
-'')
-
       ];
 
   home.file = {
@@ -129,27 +113,16 @@
     EDITOR = "nvim";
   };
 
-
-
-
-
-
-
-# programs.fzf = {
-#   enable = true;
-#   keybindings = true;
-#   };
   programs.fzf = {
     enable = true;
     defaultCommand = "fd";
   };
+
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
   };
-
-
 
 # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

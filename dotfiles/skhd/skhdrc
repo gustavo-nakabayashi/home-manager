@@ -1,1 +1,76 @@
-../../dotfiles/.config/skhd/skhdrc
+# change window focus
+
+# change window focus withing space
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - h : yabai -m window --focus west || yabai -m display --focus west
+alt - l : yabai -m window --focus east || yabai -m display --focus east
+
+# Modifying the Layout
+
+# rotate layout clockwise
+shift + alt - r : yabai -m space --rotate 270
+
+# fli along y-axis
+shift + alt - y : yabai -m space --mirror y-axis
+
+# flip along x-axis
+shift + alt - x : yabai -m space --mirror x-axis
+
+# toggle float
+shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2; sketchybar --trigger window_focus
+
+
+# maximize a window
+shift + alt - return : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
+
+# balance out windows
+shift + alt - e : yabai -m space --balance
+
+
+# -- Moving Windows Around --
+
+# swap windows
+shift + alt - j : yabai -m window --swap south
+shift + alt - k : yabai -m window --swap north
+shift + alt - h : yabai -m window --swap west 2>&1 | grep -q . && yabai -m window --display west --focus;
+shift + alt - l : yabai -m window --swap east 2>&1 | grep -q . && eval "yabai -m window --display east --focus; yabai -m space --mirror y-axis"
+
+# move window and split
+ctrl + alt - j : yabai -m window --warp south
+ctrl + alt - k : yabai -m window --warp north
+ctrl + alt - h : yabai -m window --warp west
+ctrl + alt - l : yabai -m window --warp east
+
+# move window to display left and right
+shift + alt - s : yabai -m window --display west; yabai -m display --focus west;
+shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
+
+
+# move window to prev and next space
+shift + alt - p : yabai -m window --space prev;
+shift + alt - n : yabai -m window --space next;
+
+# move window to space #
+shift + alt - 1 : yabai -m window --space 1 --focus && sketchybar --trigger windows_on_spaces
+shift + alt - 2 : yabai -m window --space 2 --focus && sketchybar --trigger windows_on_spaces
+shift + alt - 3 : yabai -m window --space 3 --focus && sketchybar --trigger windows_on_spaces
+shift + alt - 4 : yabai -m window --space 4 --focus && sketchybar --trigger windows_on_spaces
+shift + alt - 5 : yabai -m window --space 5 --focus && sketchybar --trigger windows_on_spaces
+shift + alt - 6 : yabai -m window --space 6 --focus && sketchybar --trigger windows_on_spaces
+shift + alt - 7 : yabai -m window --space 7 --focus && sketchybar --trigger windows_on_spaces
+
+hyper - 1 : yabai -m window --space 1 --focus && sketchybar --trigger windows_on_spaces
+hyper - 2 : yabai -m window --space 2 --focus && sketchybar --trigger windows_on_spaces
+hyper - 3 : yabai -m window --space 3 --focus && sketchybar --trigger windows_on_spaces
+hyper - 4 : yabai -m window --space 4 --focus && sketchybar --trigger windows_on_spaces
+hyper - 5 : yabai -m window --space 5 --focus && sketchybar --trigger windows_on_spaces
+hyper - 6 : yabai -m window --space 6 --focus && sketchybar --trigger windows_on_spaces
+hyper - 7 : yabai -m window --space 7 --focus && sketchybar --trigger windows_on_spaces
+
+# -- Starting/Stopping/Restarting Yabai --
+
+# stop/start/restart yabai
+# shift + ctrl - q : yabai --stop-service
+# shift + ctrl - s : yabai --start-service
+# shift + ctrl - r : yabai --restart-service
