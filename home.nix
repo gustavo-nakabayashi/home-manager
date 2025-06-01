@@ -98,27 +98,14 @@
 
       ];
 
-  # home.file = {
-  # ".config".source = 
-  # ".tmux.conf".source = dotfiles/.tmux.conf;
-  # ".p10k.zsh".source = dotfiles/.p10k.zsh;
-  # ".gitignore".source = dotfiles/.gitignore;
-  # ".config/nvim/lua".source = dotfiles/nvim/lua;
-  # ".config/nvim/init.lua".source =  dotfiles/nvim/init.lua;
-  # ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/nvim/lazy-lock.json";
-  # };
+  home.file = {
+    ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/nvim/lazy-lock.json";
+  };
 
   home.file.".config" = {
-    source = dotfiles;
+    source = ./dotfiles;
     recursive = true;
   };
-  ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/nvim/lazy-lock.json";
-  };
-
-  # home.file.".config" = {
-  #   source = ./dotfiles;
-  #   recursive = true;
-  # };
 
   # home.file."file.foo".source = config.lib.file.mkOutOfStoreSymlink ./path/to/file/to/link;
 # Home Manager can also manage your environment variables through
