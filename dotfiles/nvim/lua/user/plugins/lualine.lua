@@ -54,7 +54,7 @@ function M.config()
 
   local function lualine_harpoon()
     local harpoon = require "harpoon"
-    local keys = { "1", "2", "3", "4" }
+    local keys = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }
     local currentfile = vim.fn.expand "%:t" -- Using ':t' modifier to get the basename
 
     local s = ""
@@ -110,9 +110,7 @@ function M.config()
       ignore_focus = { "NvimTree" },
     },
     tabline = {
-
-      -- lualine_a = { lualine_harpoon },
-      -- lualine_a = {},
+      lualine_a = { lualine_harpoon },
       -- lualine_b = {},
       -- lualine_c = {},
       -- lualine_x = {},
@@ -127,7 +125,7 @@ function M.config()
       -- lualine_y = { "filetype" },
       -- lualine_z = { "progress" },
       lualine_a = { "mode", parrot_status },
-      lualine_b = { "filename" },
+      lualine_b = { {"filename", path=3} },
       lualine_c = { "diagnostics" },
       lualine_x = { diff, "branch" },
       lualine_y = { "filetype" },

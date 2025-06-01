@@ -78,9 +78,16 @@ M.on_init = function(client, initialization_result)
   end
 end
 
-M.on_attach = function(client, bufnr)
-  lsp_keymaps(bufnr)
-end
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if not client then return end
+    local bufnr = ev.buf
+    local server_name = client.name
+
+    lsp_keymaps(bufnr)
+  end
+})
 
 function M.common_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -110,7 +117,6 @@ function M.config()
   }
 
   vim.lsp.config("*", {
-    on_attach = M.on_attach,
     on_init = M.on_init,
     capabilities = M.common_capabilities(),
   })

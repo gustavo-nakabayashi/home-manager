@@ -6,26 +6,19 @@ require "options"
 -- spec "user.plugins.bufdelete"
 -- spec "user.plugins.bufferline"
 -- spec "user.plugins.copilot"
--- spec "user.plugins.lsp-timeout"
 spec "user.plugins.matchup"
 
 
 spec "user.plugins.lualine"
--- spec "user.plugins.dressing"
 spec "user.plugins.ufo"
 spec "user.plugins.indentline"
 --- SAFE PLUGINS
 
--- Aparently none of these are the leak
 ---- UI
 spec "user.plugins.breadcrumbs"
--- spec "user.plugins.colorizer"
--- spec "user.plugins.navic"
--- spec "user.plugins.zen-mode"
 spec "user.plugins.devicons"
 spec "user.plugins.whichkey"
 spec "user.plugins.no-neck"
--- spec "user.plugins.noice"
 
 spec "user.plugins.autoread"
 
@@ -37,12 +30,9 @@ spec "user.plugins.treesitter"
 
 -- --- UNTESTED PLUGINS
 -- ---- LSP
--- -- spec "user.plugins.neorg"
 spec "user.plugins.cmp"
--- spec "user.plugins.lspconfig"
 spec "user.plugins.mason"
 spec "user.plugins.null-ls"
--- spec "user.plugins.typescript-tools"
 spec "user.plugins.trouble"
 
 
@@ -66,10 +56,9 @@ spec "user.plugins.lazygit"
 
 -- ---- Files/navigation
 -- -- spec "user.plugins.neotree"
--- spec "user.plugins.harpoon"
+spec "user.plugins.harpoon"
 spec "user.plugins.nvimtree"
 spec "user.plugins.telescope"
-spec "user.plugins.snipe"
 
 -- ---- Utils
 spec "user.plugins.auto-save"
