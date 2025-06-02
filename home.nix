@@ -27,10 +27,26 @@
 
     # languages
       nodejs
+      nodePackages.prettier
+      eslint
+
       go
-      lua
-      stylua
+      gofumpt
+      goimports-reviser
+
       cargo
+
+      lua51Packages.lua
+      lua51Packages.luarocks
+      stylua
+
+      php
+
+      zulu21
+
+    tree-sitter
+
+
 
 
 # builds
@@ -77,6 +93,9 @@
       ];
 
   home.file = {
+    ".p10k.zsh".source = ./home/.p10k.zsh;
+    ".gitignore".source = ./home/.gitignore;
+    "karabiner.edn".source = ./home/karabiner.edn;
     ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.tmux.conf";
     ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/nvim/lazy-lock.json";
   };
@@ -112,7 +131,7 @@
     fi
 
     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-    source ~/.config/.p10k.zsh
+    source ~/.p10k.zsh
     # eval "$(~/.nix-profile/bin/mise activate zsh)"
 
     export FZF_DEFAULT_COMMAND="fd"
