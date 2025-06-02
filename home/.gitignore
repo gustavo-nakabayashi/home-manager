@@ -1,0 +1,9 @@
+Library/*
+Music/*
+.mise.toml
+.DS_Store
+.aider*
+.parrot*
+Programs/**/flake.nix
+Programs/**/flake.lock
+Programs/**/.envrc

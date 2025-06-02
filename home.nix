@@ -5,13 +5,11 @@
 
     home.packages = with pkgs; [
       lazygit
-      cargo
-      mise
       thefuck
       btop
-      mosh
-      autossh
       terraform
+      tmux
+      # mise
 
       neovim
       fd
@@ -27,6 +25,12 @@
       jq
       sops
 
+    # languages
+      nodejs
+      go
+      lua
+      stylua
+      cargo
 
 
 # builds
@@ -42,16 +46,6 @@
     automake
     libtool
 
-# # It is sometimes useful to fine-tune packages, for example, by applying
-# # overrides. You can do that directly here, just don't forget the
-# # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-# # fonts?
-# (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-
-# # You can also create simple shell scripts directly inside your
-# # configuration. For example, this adds a command 'my-hello' to your
-# # environment:
 
 (pkgs.writeShellScriptBin "tmux-sessionizer" ''
   if [[ $# -eq 1 ]]; then
@@ -83,31 +77,14 @@
       ];
 
   home.file = {
-    ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/dotfiles/nvim/lazy-lock.json";
+    ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.tmux.conf";
+    ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/nvim/lazy-lock.json";
   };
 
   home.file.".config" = {
-    source = ./dotfiles;
+    source = ./home/.config;
     recursive = true;
   };
-
-  # home.file."file.foo".source = config.lib.file.mkOutOfStoreSymlink ./path/to/file/to/link;
-# Home Manager can also manage your environment variables through
-# 'home.sessionVariables'. These will be explicitly sourced when using a
-# shell provided by Home Manager. If you don't want to manage your shell
-# through Home Manager then you have to manually source 'hm-session-vars.sh'
-# located at either
-#
-#  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-#
-# or
-#
-#  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-#
-# or
-#
-#  /etc/profiles/per-user/gustavo/etc/profile.d/hm-session-vars.sh
-#
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -136,22 +113,16 @@
 
     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
     source ~/.config/.p10k.zsh
-    eval "$(~/.nix-profile/bin/mise activate zsh)"
+    # eval "$(~/.nix-profile/bin/mise activate zsh)"
 
     export FZF_DEFAULT_COMMAND="fd"
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
     export PATH="/Users/gustavo/.local/bin:$PATH"
 
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    function y() {
-      local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-      yazi "$@" --cwd-file="$tmp"
-      if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-        builtin cd -- "$cwd"
-      fi
-      rm -f -- "$tmp"
-    }
+
     '';
 
     autosuggestion.enable = true;
@@ -174,11 +145,10 @@
       ll = "ls -l";
       update = "home-manager switch";
       lg="lazygit";
-      rn="y";
+      rn="ranger";
       gc="git clone";
-      vi="mise x node@lts -- nvim";
+      vi="nvim";
       gcm="git commit -m";
-      sts="shopify theme serve";
       tx="tmuxinator";
       c="code .";
       neorg="cd ~/notes/ && nvim -c 'Neorg index'";
@@ -221,25 +191,5 @@
       push.autoSetupRemote = true;
     };
   };
-
-
-  programs.tmux = {
-    enable = true;
-    sensibleOnTop = false;
-
-
-    extraConfig = ''
-      # Either source another config file, you push as a managed home-manager file (see xdg.Configfile)
-      source-file ~/.tmux.conf
-      
-      # our just specify your tmux config here, if you like embedding config in nix.
-      # .....
-    '';
-  };
-
-
-
-
-
 }
 
