@@ -1,6 +1,7 @@
 local M = {
   "frankroeder/parrot.nvim",
   dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+  commit = "bc987482006f25cbdd269db0d8c4489e15d8c25f",
   opts = {}
 }
 
