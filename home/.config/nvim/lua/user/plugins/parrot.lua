@@ -6,10 +6,14 @@ local M = {
 }
 
 function M.config()
+      -- Print the API key to debug
+      local anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+      print("ANTHROPIC_API_KEY:", anthropic_key)
+      
       require("parrot").setup {
       providers = {
         anthropic = {
-          api_key = os.getenv "ANTHROPIC_API_KEY",
+          api_key = anthropic_key,
         },
         -- gemini = {
         --   api_key = os.getenv "GEMINI_API_KEY",
@@ -38,7 +42,7 @@ function M.config()
         --   api_key = os.getenv "XAI_API_KEY",
         -- },
       },
-        hooks = {
+      hooks = {
         AnalyseMultiContext = function(prt, params)
           local template = [[
           I have the following code from {{filename}} and other realted files:
