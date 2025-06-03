@@ -11,6 +11,7 @@
     btop
     terraform
     tmux
+    aider-chat-full
     # mise
 
     neovim
@@ -44,10 +45,12 @@
 
     zulu21
 
-    tree-sitter
+
     nixd
     alejandra
     nil
+
+    tree-sitter
 
     # builds
     bison
@@ -61,6 +64,8 @@
     autoconf
     automake
     libtool
+
+
 
     (pkgs.writeShellScriptBin "tmux-sessionizer" ''
       if [[ $# -eq 1 ]]; then
