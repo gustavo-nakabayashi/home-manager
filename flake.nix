@@ -2,8 +2,7 @@
   description = "Your dead simple Home Manager configuration";
 
   inputs.nixpkgs = {
-    # url = "github:nixos/nixpkgs/nixos-23.05";         ## Most stable, less downloads
-    url = "github:nixos/nixpkgs/nixpkgs-unstable"; ## Bleeding edge packages
+    url = "github:nixos/nixpkgs/nixos-25.05";         ## Most stable, less downloads
     # url = "github:nixos/nixpkgs/nixos-unstable";    ## Above, but with nixos tests
   };
 
