@@ -129,11 +129,16 @@ function M.config()
     },
   })
 
+
+
   vim.lsp.config("eslint", {
     settings = {
       workingDirectories = { mode = "auto" },
     },
   })
+
+  vim.lsp.enable('nixd')
+  vim.lsp.enable('nil_ls')
 
   local icons = require "user.icons"
   local default_diagnostic_config = {

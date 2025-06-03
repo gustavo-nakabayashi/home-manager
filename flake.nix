@@ -3,7 +3,7 @@
 
   inputs.nixpkgs = {
     # url = "github:nixos/nixpkgs/nixos-23.05";         ## Most stable, less downloads
-    url = "github:nixos/nixpkgs/nixpkgs-unstable";  ## Bleeding edge packages
+    url = "github:nixos/nixpkgs/nixpkgs-unstable"; ## Bleeding edge packages
     # url = "github:nixos/nixpkgs/nixos-unstable";    ## Above, but with nixos tests
   };
 
@@ -16,7 +16,11 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager }: {
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+  }: {
     homeConfigurations = {
       "gustavo@devserver" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
@@ -33,7 +37,7 @@
           }
         ];
       };
-      
+
       "gustavo@Gustavos-MacBook-Pro" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           system = "aarch64-darwin";
@@ -49,7 +53,7 @@
           }
         ];
       };
-      
+
       # Add an alias for the same configuration without hostname
       "gustavo" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {

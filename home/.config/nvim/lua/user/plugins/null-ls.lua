@@ -22,6 +22,7 @@ function M.config()
       formatting.google_java_format,
       formatting.gofumpt,
       formatting.goimports_reviser,
+      formatting.alejandra,
       -- diagnostics.eslint,
       -- code_actions.eslint
     },
