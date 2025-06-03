@@ -6,10 +6,32 @@ local M = {
 }
 
 function M.config()
+  -- Function to read API key from file
+  local function read_api_key_from_file(file_path)
+    local file = io.open(file_path, "r")
+    if file then
+      local content = file:read("*all")
+      file:close()
+      -- Trim whitespace
+      content = content:gsub("^%s*(.-)%s*$", "%1")
+      return content
+    end
+    return nil
+  end
+
+  -- Try to get API key from environment variable first, then from file
+  local anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+  if not anthropic_key or anthropic_key == "" then
+    local home_dir = os.getenv("HOME")
+    if home_dir then
+      anthropic_key = read_api_key_from_file(home_dir .. "/.anthropic_api_key")
+    end
+  end
+
   require("parrot").setup {
     providers = {
       anthropic = {
-        api_key = os.getenv "ANTHROPIC_API_KEY",
+        api_key = anthropic_key,
       },
       -- gemini = {
       --   api_key = os.getenv "GEMINI_API_KEY",
