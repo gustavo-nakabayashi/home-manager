@@ -204,6 +204,15 @@
           };
         };
       }
+      {
+        condition = "gitdir:~/Programs/bridge/";
+        contents = {
+          user = {
+            email = "gcampos@bridgemarketplace.com";
+            name = "Gustavo Campos";
+          };
+        };
+      }
     ];
 
     extraConfig = {
