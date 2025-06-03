@@ -1,49 +1,51 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
+  # Organize packages by category
   home.packages = with pkgs; [
+    # Core tools
     neovim
+    tmux
+    tmuxinator
+    tmux-mem-cpu-load
+    
+    # CLI utilities
     lazygit
     thefuck
     btop
-    tmux
-    aider-chat-full
     ranger
-    tmuxinator
-    tmux-mem-cpu-load
     ncdu
-    zsh-powerlevel10k
-    tree-sitter
-    # mise
-
-
-    terraform
     fd
     ripgrep
     xclip
     unzip
-    awscli2
     jq
     sops
-
-    # languages
+    tree-sitter
+    
+    # AI assistants
+    aider-chat-full
+    claude-code
+    # mise
+    
+    # DevOps
+    terraform
+    awscli2
+    
+    # Programming languages
     nodejs
     eslint
-
     go
-
     lua51Packages.lua
     lua51Packages.luarocks
-
     php
-
     zulu21
-
-
+    
     # LSPs
     bash-language-server
     gopls
@@ -55,16 +57,15 @@
     vscode-langservers-extracted
     vtsls
     yaml-language-server
-
-    #formatters
+    
+    # Formatters
     alejandra
     stylua
     gofumpt
     goimports-reviser
     nodePackages.prettier
-
-
-    # builds
+    
+    # Build dependencies
     bison
     flex
     fontforge
@@ -76,35 +77,12 @@
     autoconf
     automake
     libtool
-
-
-
-    (pkgs.writeShellScriptBin "tmux-sessionizer" ''
-      if [[ $# -eq 1 ]]; then
-          selected=$1
-      else
-          selected=$({ find ~/ ~/Programs/video-peel ~/.config ~/Programs ~/Programs/bridge ~/csprimer    -mindepth 1 -maxdepth 1 -type d; }| fzf)
-      fi
-
-      if [[ -z $selected ]]; then
-          exit 0
-      fi
-
-      selected_name=$(basename "$selected" | tr . _)
-      tmux_running=$(pgrep tmux)
-
-      if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-          tmux new-session -s $selected_name -c $selected
-          exit 0
-      fi
-
-      if ! tmux has-session -t=$selected_name 2> /dev/null; then
-          tmux new-session -ds $selected_name -c $selected
-      fi
-
-      tmux switch-client -t $selected_name
-
-    '')
+    
+    # Theme
+    zsh-powerlevel10k
+    
+    # Custom scripts
+    (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile ./home/scripts/tmux-sessionizer.sh))
   ];
 
   home.file.".config" = {
@@ -118,11 +96,14 @@
     "karabiner.edn".source = ./home/karabiner.edn;
     ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.tmux.conf";
     ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/lazy-lock.json";
+    ".local/bin/tmux-sessionizer".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/scripts/tmux-sessionizer.sh";
   };
 
 
+  # Environment variables
   home.sessionVariables = {
     EDITOR = "nvim";
+    PATH = "$HOME/.local/bin:$PATH";
   };
 
   programs.fzf = {
@@ -151,8 +132,6 @@
 
       export FZF_DEFAULT_COMMAND="fd"
       export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-      export PATH="/Users/gustavo/.local/bin:$PATH"
 
       eval "$(/opt/homebrew/bin/brew shellenv)"
     '';
