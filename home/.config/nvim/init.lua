@@ -2,6 +2,7 @@ require "autocmds"
 require "keymaps"
 require "launch"
 require "options"
+
 -- spec "user.plugins.alpha"
 -- spec "user.plugins.bufdelete"
 -- spec "user.plugins.bufferline"
@@ -31,7 +32,7 @@ spec "user.plugins.treesitter"
 -- --- UNTESTED PLUGINS
 -- ---- LSP
 spec "user.plugins.cmp"
-spec "user.plugins.mason"
+spec "user.plugins.lspconfig"
 spec "user.plugins.null-ls"
 spec "user.plugins.trouble"
 

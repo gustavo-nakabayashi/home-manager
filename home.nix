@@ -6,23 +6,25 @@
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    neovim
     lazygit
     thefuck
     btop
-    terraform
     tmux
     aider-chat-full
+    ranger
+    tmuxinator
+    tmux-mem-cpu-load
+    ncdu
+    zsh-powerlevel10k
+    tree-sitter
     # mise
 
-    neovim
+
+    terraform
     fd
     ripgrep
-    ranger
-    zsh-powerlevel10k
-    ncdu
-    tmuxinator
     xclip
-    tmux-mem-cpu-load
     unzip
     awscli2
     jq
@@ -30,27 +32,37 @@
 
     # languages
     nodejs
-    nodePackages.prettier
     eslint
 
     go
-    gofumpt
-    goimports-reviser
 
     lua51Packages.lua
     lua51Packages.luarocks
-    stylua
 
     php
 
     zulu21
 
 
-    nixd
-    alejandra
+    # LSPs
+    bash-language-server
+    gopls
+    lua-language-server
+    marksman
     nil
+    nixd
+    terraform-ls
+    vscode-langservers-extracted
+    vtsls
+    yaml-language-server
 
-    tree-sitter
+    #formatters
+    alejandra
+    stylua
+    gofumpt
+    goimports-reviser
+    nodePackages.prettier
+
 
     # builds
     bison
@@ -95,18 +107,19 @@
     '')
   ];
 
+  home.file.".config" = {
+    source = ./home/.config;
+    recursive = true;
+  };
+
   home.file = {
     ".p10k.zsh".source = ./home/.p10k.zsh;
     ".gitignore".source = ./home/.gitignore;
     "karabiner.edn".source = ./home/karabiner.edn;
     ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.tmux.conf";
-    ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/nvim/lazy-lock.json";
+    ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/lazy-lock.json";
   };
 
-  home.file.".config" = {
-    source = ./home/.config;
-    recursive = true;
-  };
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -135,7 +148,6 @@
 
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       source ~/.p10k.zsh
-      # eval "$(~/.nix-profile/bin/mise activate zsh)"
 
       export FZF_DEFAULT_COMMAND="fd"
       export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -143,8 +155,6 @@
       export PATH="/Users/gustavo/.local/bin:$PATH"
 
       eval "$(/opt/homebrew/bin/brew shellenv)"
-
-
     '';
 
     autosuggestion.enable = true;
