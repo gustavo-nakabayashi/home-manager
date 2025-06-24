@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  pkgs-unstable,
   lib,
   ...
 }: {
@@ -13,7 +14,8 @@
     tmux
     tmuxinator
     tmux-mem-cpu-load
-    
+    devenv
+    gh
     # CLI utilities
     lazygit
     thefuck
@@ -26,26 +28,25 @@
     unzip
     jq
     sops
+    mysql80
+
     tree-sitter
-    
+
     # AI assistants
     aider-chat-full
-    claude-code
-    # mise
-    
+
     # DevOps
     terraform
     awscli2
-    
+
     # Programming languages
     nodejs
-    eslint
     go
     lua51Packages.lua
     lua51Packages.luarocks
     php
     zulu21
-    
+
     # LSPs
     bash-language-server
     gopls
@@ -57,14 +58,14 @@
     vscode-langservers-extracted
     vtsls
     yaml-language-server
-    
+
     # Formatters
     alejandra
     stylua
     gofumpt
     goimports-reviser
     nodePackages.prettier
-    
+
     # Build dependencies
     bison
     flex
@@ -77,13 +78,16 @@
     autoconf
     automake
     libtool
-    
+
     # Theme
     zsh-powerlevel10k
-    
+
     # Custom scripts
     (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile ./home/scripts/tmux-sessionizer.sh))
-  ];
+  ] ++ (with pkgs-unstable; [
+    # AI assistants (unstable)
+    claude-code
+  ]);
 
   home.file.".config" = {
     source = ./home/.config;
@@ -98,7 +102,6 @@
     ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/lazy-lock.json";
     ".local/bin/tmux-sessionizer".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/scripts/tmux-sessionizer.sh";
   };
-
 
   # Environment variables
   home.sessionVariables = {
