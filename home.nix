@@ -66,38 +66,38 @@
     goimports-reviser
     nodePackages.prettier
 
-    # Build dependencies
-    bison
-    flex
-    fontforge
-    makeWrapper
-    pkg-config
-    gnumake
-    gcc
-    libiconv
-    autoconf
-    automake
-    libtool
+    # # Build dependencies
+    # bison
+    # flex
+    # fontforge
+    # makeWrapper
+    # pkg-config
+    # gnumake
+    # gcc
+    # libiconv
+    # autoconf
+    # automake
+    # libtool
 
     # Theme
     zsh-powerlevel10k
 
     # Custom scripts
-    (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile ./home/scripts/tmux-sessionizer.sh))
+    (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile (builtins.path { path = ./home/scripts/tmux-sessionizer.sh; name = "tmux-sessionizer-sh"; })))
   ] ++ (with pkgs-unstable; [
     # AI assistants (unstable)
     claude-code
   ]);
 
   home.file.".config" = {
-    source = ./home/.config;
+    source = builtins.path { path = ./home/.config; name = "config"; };
     recursive = true;
   };
 
   home.file = {
-    ".p10k.zsh".source = ./home/.p10k.zsh;
-    ".gitignore".source = ./home/.gitignore;
-    "karabiner.edn".source = ./home/karabiner.edn;
+    ".p10k.zsh".source = builtins.path { path = ./home/.p10k.zsh; name = "p10k-zsh"; };
+    ".gitignore".source = builtins.path { path = ./home/.gitignore; name = "gitignore"; };
+    "karabiner.edn".source = builtins.path { path = ./home/karabiner.edn; name = "karabiner-edn"; };
     ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.tmux.conf";
     ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/lazy-lock.json";
     ".local/bin/tmux-sessionizer".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/scripts/tmux-sessionizer.sh";
@@ -151,6 +151,9 @@
         "rust"
         "deno"
         "thefuck"
+        "aws"
+        "gh"
+        # "git-auto-fetch"
       ];
     };
 

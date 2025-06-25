@@ -4,7 +4,6 @@ Music/*
 .DS_Store
 .aider*
 .parrot*
-flake.nix
 flake.lock
-.envrc
 .direnv/*
+.envrc
