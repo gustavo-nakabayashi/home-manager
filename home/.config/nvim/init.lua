@@ -6,7 +6,7 @@ require "options"
 -- spec "user.plugins.alpha"
 -- spec "user.plugins.bufdelete"
 -- spec "user.plugins.bufferline"
--- spec "user.plugins.copilot"
+spec "user.plugins.copilot"
 spec "user.plugins.matchup"
 
 
@@ -32,6 +32,7 @@ spec "user.plugins.treesitter"
 -- --- UNTESTED PLUGINS
 -- ---- LSP
 spec "user.plugins.cmp"
+-- spec "user.plugins.blink"
 spec "user.plugins.lspconfig"
 spec "user.plugins.null-ls"
 spec "user.plugins.trouble"
@@ -63,11 +64,11 @@ spec "user.plugins.telescope"
 
 -- ---- Utils
 spec "user.plugins.auto-save"
--- -- spec "user.plugins.autopairs"
+spec "user.plugins.autopairs"
 -- -- spec "user.plugins.quickfix-reflector"
 spec "user.plugins.repeat"
 spec "user.plugins.auto-dark-mode"
-spec "user.plugins.emmet"
+-- spec "user.plugins.emmet"
 spec "user.plugins.schemastore"
 spec "user.plugins.undotree"
 spec "user.plugins.visual-star-search"

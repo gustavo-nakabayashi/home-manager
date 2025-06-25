@@ -15,10 +15,6 @@ local M = {
       "RRethy/nvim-treesitter-textsubjects",
       event = "VeryLazy",
     },
-    -- {
-    --   "windwp/nvim-ts-autotag",
-    --   event = "VeryLazy",
-    -- },
   },
 }
 function M.config()
@@ -60,14 +56,11 @@ function M.config()
       disable = { "lua", "liquid", "html", "javascript", "javascriptreact" },
     },
 
-    autotag = { enable = true },
 
     custom_captures = {
       -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
       ["Statement"] = "#FF0000",
     },
-
-    autopairs = { enable = true },
 
     textobjects = {
       select = {

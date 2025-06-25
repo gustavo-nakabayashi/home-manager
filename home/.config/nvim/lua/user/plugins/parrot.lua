@@ -24,7 +24,7 @@ function M.config()
   if not anthropic_key or anthropic_key == "" then
     local home_dir = os.getenv("HOME")
     if home_dir then
-      anthropic_key = read_api_key_from_file(home_dir .. "/.anthropic_api_key")
+      anthropic_key = read_api_key_from_file("/Users/gustavo" .. "/.secret-env")
     end
   end
 
