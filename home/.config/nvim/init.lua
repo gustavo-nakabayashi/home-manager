@@ -36,6 +36,7 @@ spec "user.plugins.cmp"
 spec "user.plugins.lspconfig"
 spec "user.plugins.null-ls"
 spec "user.plugins.trouble"
+spec "user.plugins.sonar"
 
 
 -- ---- Colorschemes
