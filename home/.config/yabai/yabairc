@@ -35,7 +35,7 @@ yabai -m rule --add app="^Karabiner-Elements$" manage=off
 yabai -m rule --add app="^Activity Monitor$" manage=off sticky=on
 yabai -m rule --add app="^Steam Helper$" manage=off
 yabai -m rule --add app="^XCOM 2$" manage=off
-yabai -m rule --add app="^Finder$" manage=off sticky=on
+yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Digital Color Meter$" manage=off sticky=on
 
 # yabai -m config external_bar all:0:0
@@ -58,10 +58,6 @@ yabai -m rule --add app="^Slack$" space=^3
 yabai -m rule --add app="^Discord$" space=^3
 yabai -m rule --add app="^Spotify$" space=^3
 
-yabai -m rule --add app="^Notion Calendar$" space=^5
 
 yabai -m config --space 3 layout stack
 
-yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
-yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
-yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
