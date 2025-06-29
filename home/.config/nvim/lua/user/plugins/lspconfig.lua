@@ -140,6 +140,7 @@ function M.config()
   vim.lsp.enable "marksman"
   vim.lsp.enable "nil_ls"
   vim.lsp.enable "nixd"
+  vim.lsp.enable "racket_langserver"
   vim.lsp.enable "terraformls"
   vim.lsp.enable "vtsls"
   vim.lsp.enable "yamlls"

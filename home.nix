@@ -8,17 +8,15 @@
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   # Organize packages by category
-  home.packages = with pkgs; [
+  home.packages = with pkgs-unstable; [
     # Core tools
     neovim
     tmux
     tmuxinator
     tmux-mem-cpu-load
-    devenv
     gh
     # CLI utilities
     lazygit
-    thefuck
     btop
     ranger
     ncdu
@@ -33,7 +31,7 @@
     tree-sitter
 
     # AI assistants
-    aider-chat-full
+    claude-code
 
     # DevOps
     terraform
@@ -42,10 +40,11 @@
     # Programming languages
     nodejs
     go
+    jdk21
     lua51Packages.lua
     lua51Packages.luarocks
     php
-    zulu21
+    racket
 
     # LSPs
     bash-language-server
@@ -54,10 +53,12 @@
     marksman
     nil
     nixd
+    racket-langserver
     terraform-ls
     vscode-langservers-extracted
     vtsls
     yaml-language-server
+    sonarlint-ls
 
     # Formatters
     alejandra
@@ -67,26 +68,26 @@
     nodePackages.prettier
 
     # # Build dependencies
-    # bison
-    # flex
-    # fontforge
-    # makeWrapper
-    # pkg-config
-    # gnumake
-    # gcc
-    # libiconv
-    # autoconf
-    # automake
-    # libtool
+    bison
+    flex
+    fontforge
+    makeWrapper
+    pkg-config
+    gnumake
+    gcc
+    libiconv
+    autoconf
+    automake
+    libtool
 
     # Theme
     zsh-powerlevel10k
 
     # Custom scripts
     (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile (builtins.path { path = ./home/scripts/tmux-sessionizer.sh; name = "tmux-sessionizer-sh"; })))
-  ] ++ (with pkgs-unstable; [
+  ] ++ (with pkgs; [
     # AI assistants (unstable)
-    claude-code
+    aider-chat-full
   ]);
 
   home.file.".config" = {
@@ -107,6 +108,8 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     PATH = "$HOME/.local/bin:$PATH";
+    JAVA_HOME = "${pkgs-unstable.jdk21}";
+    SONAR_LINT_HOME = "${pkgs-unstable.sonarlint-ls}";
   };
 
   programs.fzf = {
@@ -150,10 +153,9 @@
         "node"
         "rust"
         "deno"
-        "thefuck"
         "aws"
         "gh"
-        # "git-auto-fetch"
+        "git-auto-fetch"
       ];
     };
 
