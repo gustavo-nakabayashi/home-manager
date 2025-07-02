@@ -81,7 +81,7 @@ spec "user.plugins.textobj-user"
 spec "user.plugins.textobj-user-entire"
 spec "user.plugins.nvim-surround"
 
-spec "user.plugins.parrot"
+-- spec "user.plugins.parrot"
 spec "user.plugins.outline"
 spec "user.plugins.oil-nvim"
 
