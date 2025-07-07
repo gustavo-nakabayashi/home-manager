@@ -1,0 +1,14 @@
+# /Users/gustavo/.config/tmuxinator/videopeel-web.yml
+
+name: bridge-app-ui
+root: ~/Programs/bridge/bridge-app-ui
+
+windows:
+  - editor: vi
+  - claude: claude
+  - git: lg
+  - server: 
+      layout: main-vertical
+      panes:
+        - pnpm start:battery
+        - pnpm tsc --watch
