@@ -44,7 +44,6 @@
     lua51Packages.lua
     lua51Packages.luarocks
     php
-    racket
 
     # LSPs
     bash-language-server
@@ -53,7 +52,6 @@
     marksman
     nil
     nixd
-    racket-langserver
     terraform-ls
     vscode-langservers-extracted
     vtsls
