@@ -1,0 +1,20 @@
+use flake
+
+# Check if AWS SSO session is active and not expired
+check_aws_sso() {
+  # Try to get caller identity (will fail if not authenticated)
+  if ! aws sts get-caller-identity --profile bridge-gustavo-prof &> /dev/null; then
+    return 1
+  fi
+  return 0
+}
+
+# Only run AWS SSO login if needed
+if ! check_aws_sso; then
+  echo "AWS SSO session not found or expired. Logging in..."
+  aws sso login --profile bridge-gustavo-prof
+else
+  echo "AWS SSO session is active. Skipping login."
+fi
+
+export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain artifact --domain-owner 852653041886 --region us-east-2 --query authorizationToken --output text --profile bridge-gustavo-prof`

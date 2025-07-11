@@ -65,24 +65,32 @@ target_path="$work_dir/$folder_name"
 
 echo "Fetching latest changes..."
 if [[ -n "$bare_repo_dir" ]]; then
-    git -C "$bare_repo_dir" fetch --all
+    git -C "$bare_repo_dir" fetch origin "+refs/heads/*:refs/remotes/origin/*"
 else
-    git fetch --all
+    git fetch origin "+refs/heads/*:refs/remotes/origin/*"
 fi
 
 echo "Creating worktree for branch: $branch_name"
 echo "Target folder: $target_path"
 
 if [[ -n "$bare_repo_dir" ]]; then
-    git -C "$bare_repo_dir" worktree add "$target_path" "$branch_name"
+    git -C "$bare_repo_dir" worktree add -b "$branch_name" "$target_path" "origin/$branch_name"
 else
-    git worktree add "$target_path" "$branch_name"
+    git worktree add -b "$branch_name" "$target_path" "origin/$branch_name"
 fi
 
 if [[ $? -eq 0 ]]; then
     echo "✅ Worktree created successfully!"
     echo "📁 Path: $target_path"
     echo "🌿 Branch: $branch_name"
+    
+    # Create .envrc file if template exists
+    envrc_template="$HOME/.config/home-manager/dotfiles/$repo_name/envrc"
+    if [[ -f "$envrc_template" ]]; then
+        cp "$envrc_template" "$target_path/.envrc"
+        echo "📄 Created .envrc file"
+    fi
+    
     echo ""
     echo "To switch to this worktree:"
     echo "  cd $target_path"
