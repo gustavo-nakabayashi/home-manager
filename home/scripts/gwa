@@ -65,9 +65,9 @@ target_path="$work_dir/$folder_name"
 
 echo "Fetching latest changes..."
 if [[ -n "$bare_repo_dir" ]]; then
-    git -C "$bare_repo_dir" fetch
+    git -C "$bare_repo_dir" fetch --all
 else
-    git fetch
+    git fetch --all
 fi
 
 echo "Creating worktree for branch: $branch_name"
