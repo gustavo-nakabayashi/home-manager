@@ -18,8 +18,8 @@ repo_name=$(basename "$worktree_path")
 # Remove common worktree suffixes to get base repo name
 base_repo_name=$(echo "$repo_name" | sed -E 's/-(main|current|dev|feature.*|fix.*|hotfix.*)$//')
 
-# Pins file location
-pins_file="$HOME/.config/tmux-worktree-pins"
+# Pins file location - write directly to repo file to ensure git tracking
+pins_file="$HOME/.config/home-manager/home/tmux-worktree-pins"
 
 # Create pins file if it doesn't exist
 if [[ ! -f "$pins_file" ]]; then

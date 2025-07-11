@@ -10,20 +10,29 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
-# Check for pinned worktree
-pins_file="$HOME/.config/tmux-worktree-pins"
+# Check for pinned worktree - read from repo file
+pins_file="$HOME/.config/home-manager/home/tmux-worktree-pins"
 selected_name=$(basename "$selected" | tr . _)
 
 if [[ -f "$pins_file" ]]; then
-    # Remove common worktree suffixes to get base repo name
-    base_repo_name=$(echo "$selected_name" | sed -E 's/-(main|current|dev|feature.*|fix.*|hotfix.*)$//')
+    # Only apply pin logic to exact repo names or simple suffixes
+    # Don't redirect worktrees with specific branch names
+    base_repo_name="$selected_name"
     
-    # Check if there's a pin for this repo
-    pinned_path=$(grep "^${base_repo_name}:" "$pins_file" 2>/dev/null | cut -d: -f2-)
+    # Only strip simple suffixes, not full branch names
+    if [[ "$selected_name" =~ ^(.+)-(main|current|dev)$ ]]; then
+        base_repo_name="${BASH_REMATCH[1]}"
+    fi
     
-    if [[ -n "$pinned_path" && -d "$pinned_path" ]]; then
-        selected="$pinned_path"
-        selected_name="$base_repo_name"
+    # Only redirect if it's the exact base repo name, not specific worktrees
+    if [[ "$base_repo_name" == "$selected_name" ]]; then
+        pinned_path=$(grep "^${base_repo_name}:" "$pins_file" 2>/dev/null | cut -d: -f2-)
+        
+        if [[ -n "$pinned_path" && -d "$pinned_path" ]]; then
+            selected="$pinned_path"
+            # Keep the actual worktree name for the session, not the base repo name
+            selected_name=$(basename "$pinned_path" | tr . _)
+        fi
     fi
 fi
 tmux_running=$(pgrep tmux)

@@ -84,6 +84,7 @@
     # Custom scripts
     (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile (builtins.path { path = ./home/scripts/tmux-sessionizer.sh; name = "tmux-sessionizer-sh"; })))
     (pkgs.writeShellScriptBin "tmux-pin-current" (builtins.readFile (builtins.path { path = ./home/scripts/tmux-pin-current; name = "tmux-pin-current"; })))
+    (pkgs.writeShellScriptBin "gwa" (builtins.readFile (builtins.path { path = ./home/scripts/gwa; name = "gwa"; })))
   ] ++ (with pkgs; [
     # AI assistants (unstable)
     aider-chat-full
@@ -100,7 +101,6 @@
     "karabiner.edn".source = builtins.path { path = ./home/karabiner.edn; name = "karabiner-edn"; };
     ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.tmux.conf";
     ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/lazy-lock.json";
-    ".config/tmux-worktree-pins".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/tmux-worktree-pins";
     ".local/bin/tmux-sessionizer".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/scripts/tmux-sessionizer.sh";
   };
 

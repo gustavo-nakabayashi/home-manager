@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+
+# gwa - Git Worktree Add with smart folder naming
+# Usage: gwa <branch-name>
+# Example: gwa feature/CORE-3670-Allow-form.io-choices-widget-to-use-search-and-select-in-our-styling
+#          Creates folder: feature-CORE-3670
+
+if [[ $# -ne 1 ]]; then
+    echo "Usage: gwa <branch-name>"
+    echo "Example: gwa feature/CORE-3670-Allow-form.io-choices-widget-to-use-search-and-select-in-our-styling"
+    exit 1
+fi
+
+branch_name="$1"
+
+# Check if we're in a bare repo
+git_dir=$(git rev-parse --git-dir 2>/dev/null)
+if [[ ! $git_dir ]]; then
+    echo "Error: Not in a git repository"
+    exit 1
+fi
+
+# Check if we're in a bare repository
+if git rev-parse --is-bare-repository &>/dev/null && [[ $(git rev-parse --is-bare-repository) == "true" ]]; then
+    echo "Using bare repository"
+    bare_repo_dir="$PWD"
+    work_dir="$(dirname "$PWD")"
+else
+    echo "Using worktree repository"
+    # We're in a worktree, find the associated bare repo
+    git_common_dir=$(git rev-parse --git-common-dir)
+    if [[ "$git_common_dir" != "$git_dir" ]]; then
+        # This is a worktree, the common dir points to the main repo
+        bare_repo_dir="$git_common_dir"
+        work_dir="$(dirname "$git_common_dir")"
+    else
+        # This is the main repo, not a bare setup
+        git_root=$(git rev-parse --show-toplevel)
+        bare_repo_dir=""
+        work_dir="$git_root"
+    fi
+fi
+
+# Get repo name from current directory or bare repo
+if [[ -n "$bare_repo_dir" ]]; then
+    repo_name=$(basename "$bare_repo_dir" .git)
+else
+    repo_name=$(basename "$work_dir")
+fi
+
+# Extract folder name from branch
+# feature/CORE-3670-Allow-form.io-choices-widget-to-use-search-and-select-in-our-styling
+# becomes: bridge-app-ui-feature-core-3670
+if [[ "$branch_name" =~ ^([^/]+)/([^-]+-[0-9]+) ]]; then
+    # Match: feature/CORE-3670 (captures the issue number too)
+    branch_part="${BASH_REMATCH[1]}-${BASH_REMATCH[2]}"
+    folder_name="${repo_name}-${branch_part,,}"  # lowercase
+else
+    # Fallback: replace slashes with dashes and truncate
+    branch_clean=$(echo "$branch_name" | sed 's|/|-|g' | cut -c1-30)
+    folder_name="${repo_name}-${branch_clean,,}"  # lowercase
+fi
+
+target_path="$work_dir/$folder_name"
+
+echo "Fetching latest changes..."
+if [[ -n "$bare_repo_dir" ]]; then
+    git -C "$bare_repo_dir" fetch
+else
+    git fetch
+fi
+
+echo "Creating worktree for branch: $branch_name"
+echo "Target folder: $target_path"
+
+if [[ -n "$bare_repo_dir" ]]; then
+    git -C "$bare_repo_dir" worktree add "$target_path" "$branch_name"
+else
+    git worktree add "$target_path" "$branch_name"
+fi
+
+if [[ $? -eq 0 ]]; then
+    echo "✅ Worktree created successfully!"
+    echo "📁 Path: $target_path"
+    echo "🌿 Branch: $branch_name"
+    echo ""
+    echo "To switch to this worktree:"
+    echo "  cd $target_path"
+else
+    echo "❌ Failed to create worktree"
+    exit 1
+fi
