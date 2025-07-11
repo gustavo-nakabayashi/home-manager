@@ -10,7 +10,22 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
+# Check for pinned worktree
+pins_file="$HOME/.config/tmux-worktree-pins"
 selected_name=$(basename "$selected" | tr . _)
+
+if [[ -f "$pins_file" ]]; then
+    # Remove common worktree suffixes to get base repo name
+    base_repo_name=$(echo "$selected_name" | sed -E 's/-(main|current|dev|feature.*|fix.*|hotfix.*)$//')
+    
+    # Check if there's a pin for this repo
+    pinned_path=$(grep "^${base_repo_name}:" "$pins_file" 2>/dev/null | cut -d: -f2-)
+    
+    if [[ -n "$pinned_path" && -d "$pinned_path" ]]; then
+        selected="$pinned_path"
+        selected_name="$base_repo_name"
+    fi
+fi
 tmux_running=$(pgrep tmux)
 
 tmuxinator_config="$HOME/.config/tmuxinator/${selected_name}.yml"
