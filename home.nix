@@ -214,6 +214,7 @@
       };
 
       core.excludesFile = "~/.gitignore";
+      core.hooksPath = "~/.config/home-manager/home/scripts/git-hooks";
       push.autoSetupRemote = true;
     };
   };
