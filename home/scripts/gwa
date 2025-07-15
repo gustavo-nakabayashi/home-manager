@@ -50,11 +50,35 @@ fi
 
 # Extract folder name from branch
 # feature/CORE-3670-Allow-form.io-choices-widget-to-use-search-and-select-in-our-styling
-# becomes: bridge-app-ui-feature-core-3670
-if [[ "$branch_name" =~ ^([^/]+)/([^-]+-[0-9]+) ]]; then
-    # Match: feature/CORE-3670 (captures the issue number too)
-    branch_part="${BASH_REMATCH[1]}-${BASH_REMATCH[2]}"
-    folder_name="${repo_name}-${branch_part,,}"  # lowercase
+# becomes: bridge-app-ui-3670-in-our-styling
+if [[ "$branch_name" =~ ^[^/]+/[^-]+-([0-9]+) ]]; then
+    # Extract just the number (e.g., 3670)
+    task_number="${BASH_REMATCH[1]}"
+    
+    # Extract the description part after the task number
+    description="${branch_name#*/}"
+    description="${description#*-*-}"  # Remove prefix and task number
+    
+    # Split description into words and get the last 3 (or fewer if less than 3)
+    IFS='-' read -ra words <<< "$description"
+    word_count=${#words[@]}
+    
+    if [[ $word_count -ge 3 ]]; then
+        last_words="${words[-3]}-${words[-2]}-${words[-1]}"
+    elif [[ $word_count -eq 2 ]]; then
+        last_words="${words[-2]}-${words[-1]}"
+    elif [[ $word_count -eq 1 ]]; then
+        last_words="${words[-1]}"
+    else
+        last_words=""
+    fi
+    
+    # Create folder name: repo-number-lastwords
+    if [[ -n "$last_words" ]]; then
+        folder_name="${repo_name}-${task_number}-${last_words,,}"
+    else
+        folder_name="${repo_name}-${task_number}"
+    fi
 else
     # Fallback: replace slashes with dashes and truncate
     branch_clean=$(echo "$branch_name" | sed 's|/|-|g' | cut -c1-30)
