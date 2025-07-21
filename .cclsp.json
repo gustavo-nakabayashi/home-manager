@@ -1,0 +1,52 @@
+{
+  "servers": [
+    {
+      "name": "lua",
+      "command": "lua-language-server",
+      "args": [],
+      "filetypes": ["lua"]
+    },
+    {
+      "name": "nil", 
+      "command": "nil",
+      "args": [],
+      "filetypes": ["nix"]
+    },
+    {
+      "name": "bash",
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh", "bash", "zsh"]
+    },
+    {
+      "name": "gopls",
+      "command": "gopls", 
+      "args": [],
+      "filetypes": ["go", "gomod", "gosum"]
+    },
+    {
+      "name": "vtsls",
+      "command": "vtsls",
+      "args": ["--stdio"],
+      "filetypes": ["typescript", "javascript", "typescriptreact", "javascriptreact"]
+    },
+    {
+      "name": "marksman",
+      "command": "marksman",
+      "args": ["server"],
+      "filetypes": ["markdown", "md"]
+    },
+    {
+      "name": "terraform-ls",
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf", "tfvars"]
+    },
+    {
+      "name": "yaml",
+      "command": "yaml-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["yaml", "yml"]
+    }
+  ]
+}
