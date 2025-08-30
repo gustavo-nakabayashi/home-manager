@@ -131,6 +131,7 @@ function M.config()
   })
 
   vim.lsp.enable "bashls"
+  vim.lsp.enable "clojure_lsp"
   vim.lsp.enable "cssls"
   vim.lsp.enable "eslint"
   vim.lsp.enable "gopls"

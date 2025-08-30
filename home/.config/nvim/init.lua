@@ -74,6 +74,10 @@ spec "user.plugins.schemastore"
 spec "user.plugins.undotree"
 spec "user.plugins.visual-star-search"
 
+-- ---- Clojure/Lisp
+spec "user.plugins.conjure"
+spec "user.plugins.parinfer"
+
 -- ---- Motions or actions, textobjects/ vim enhancing features
 spec "user.plugins.targets"
 spec "user.plugins.comment"

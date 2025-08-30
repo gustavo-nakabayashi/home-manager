@@ -35,8 +35,6 @@
       # AI assistants
       mcp-nixos
       uv
-      whatsapp-bridge-script
-      whatsapp-mcp-server-script
 
       # DevOps
       terraform
@@ -49,9 +47,12 @@
       lua51Packages.lua
       lua51Packages.luarocks
       php
+      clojure
+      babashka
 
       # LSPs
       bash-language-server
+      clojure-lsp
       gopls
       lua-language-server
       marksman
