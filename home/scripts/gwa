@@ -108,13 +108,6 @@ if [[ $? -eq 0 ]]; then
     echo "📁 Path: $target_path"
     echo "🌿 Branch: $branch_name"
     
-    # Create .envrc file if template exists
-    envrc_template="$HOME/.config/home-manager/dotfiles/$repo_name/envrc"
-    if [[ -f "$envrc_template" ]]; then
-        cp "$envrc_template" "$target_path/.envrc"
-        echo "📄 Created .envrc file"
-    fi
-    
     echo ""
     echo "To switch to this worktree:"
     echo "  cd $target_path"

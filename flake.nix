@@ -14,11 +14,22 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  inputs.mcp-nixos = {
+    url = "github:utensils/mcp-nixos";
+  };
+
+  inputs.whatsapp-mcp = {
+    url = "github:lharries/whatsapp-mcp";
+    flake = false;
+  };
+
   outputs = {
     self,
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
+    mcp-nixos,
+    whatsapp-mcp,
   }: {
     homeConfigurations = {
       "gustavo" = home-manager.lib.homeManagerConfiguration {
@@ -32,6 +43,8 @@
             system = "aarch64-darwin";
             config.allowUnfree = true;
           };
+          mcp-nixos = mcp-nixos.packages.aarch64-darwin.default;
+          whatsapp-mcp = whatsapp-mcp;
         };
 
         modules = [
