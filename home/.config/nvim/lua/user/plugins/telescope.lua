@@ -22,7 +22,7 @@ function M.config()
       entry_prefix = "   ",
       initial_mode = "insert",
       selection_strategy = "reset",
-      path_display = { "truncate" },
+      path_display = { "filename_first" },
       color_devicons = true,
       set_env = { ["COLORTERM"] = "truecolor" },
       sorting_strategy = nil,

@@ -23,8 +23,10 @@ function M.config()
       formatting.gofumpt,
       formatting.goimports_reviser,
       formatting.alejandra,
+      formatting.cljfmt.with { extra_args = {  "--function-arguments-indentation", "cursive" } },
       -- diagnostics.eslint,
       -- code_actions.eslint
+      diagnostics.clj_kondo,
     },
   }
 end

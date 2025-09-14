@@ -51,7 +51,7 @@ spec "user.plugins.colorscheme-gruvbox"
 spec "user.plugins.colorscheme-tokyonight"
 
 -- -- Git
--- -- spec "user.plugins.diffview"
+spec "user.plugins.diffview"
 -- -- spec "user.plugins.neogit"
 spec "user.plugins.gitblame"
 spec "user.plugins.gitsigns"

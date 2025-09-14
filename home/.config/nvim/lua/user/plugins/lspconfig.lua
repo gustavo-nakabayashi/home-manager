@@ -3,7 +3,17 @@ local M = {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     {
-      "folke/neodev.nvim",
+      {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        cmd = "LazyDev",
+        opts = {
+          library = {
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          },
+        },
+      },
+      "yioneko/nvim-vtsls",
     },
   },
 }
@@ -69,7 +79,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = ev.buf
     local server_name = client.name
 
-    lsp_keymaps(bufnr)
+    lsp_keymaps(bufnr, server_name)
   end,
 })
 
@@ -130,7 +140,56 @@ function M.config()
     end,
   })
 
+  vim.lsp.config("vtsls", {
+    -- explicitly add default filetypes, so that we can extend
+    -- them in related extras
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript",
+      "typescriptreact",
+      "typescript.tsx",
+    },
+    settings = {
+      complete_function_calls = true,
+      vtsls = {
+        enableMoveToFileCodeAction = true,
+        autoUseWorkspaceTsdk = true,
+        experimental = {
+          maxInlayHintLength = 30,
+          completion = {
+            enableServerSideFuzzyMatch = true,
+          },
+        },
+      },
+      typescript = {
+        updateImportsOnFileMove = { enabled = "always" },
+        suggest = {
+          completeFunctionCalls = true,
+        },
+        inlayHints = {
+          enumMemberValues = { enabled = true },
+          functionLikeReturnTypes = { enabled = true },
+          parameterNames = { enabled = "literals" },
+          parameterTypes = { enabled = true },
+          propertyDeclarationTypes = { enabled = true },
+          variableTypes = { enabled = false },
+        },
+      },
+    },
+  })
+
   vim.lsp.enable "bashls"
+  vim.lsp.config("clojure_lsp", {
+    settings = {
+      ["clojure-lsp"] = {
+        hover = {
+          hideFileLocation = false,
+        },
+      },
+    },
+  })
   vim.lsp.enable "clojure_lsp"
   vim.lsp.enable "cssls"
   vim.lsp.enable "eslint"
