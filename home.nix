@@ -35,6 +35,7 @@
       # AI assistants
       mcp-nixos
       uv
+      exercism
 
       # DevOps
       terraform
@@ -49,6 +50,7 @@
       php
       clojure
       babashka
+      clj-kondo
 
       # LSPs
       bash-language-server
@@ -70,6 +72,7 @@
       gofumpt
       goimports-reviser
       nodePackages.prettier
+      cljfmt
 
       # # Build dependencies
       bison

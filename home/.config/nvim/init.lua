@@ -77,6 +77,9 @@ spec "user.plugins.visual-star-search"
 -- ---- Clojure/Lisp
 spec "user.plugins.conjure"
 spec "user.plugins.parinfer"
+spec "user.plugins.rainbow-delimiters"
+spec "user.plugins.treesitter-sexp"
+spec "user.plugins.vim-sexp"
 
 -- ---- Motions or actions, textobjects/ vim enhancing features
 spec "user.plugins.targets"
