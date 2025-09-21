@@ -43,6 +43,7 @@
 
       # Programming languages
       nodejs
+      pnpm
       go
       jdk21
       lua51Packages.lua
@@ -51,6 +52,7 @@
       clojure
       babashka
       clj-kondo
+      leiningen
 
       # LSPs
       bash-language-server
