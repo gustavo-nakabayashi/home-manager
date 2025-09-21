@@ -65,7 +65,7 @@
     };
 
     NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
+      AppleInterfaceStyle = null;
       AppleKeyboardUIMode = 3;
       ApplePressAndHoldEnabled = false;
       InitialKeyRepeat = 15;
@@ -130,7 +130,6 @@
       "cursor"
       "dbeaver-community"
       "discord"
-      "docker"
       "figma"
       "firefox"
       "ghostty"
@@ -154,6 +153,7 @@
       "stats"
       "sublime-text"
       "visual-studio-code"
+      "1password"
     ];
 
     masApps = {
