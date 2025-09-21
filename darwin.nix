@@ -35,25 +35,14 @@
     JAVA_HOME = "${pkgs.jdk21}";
   };
 
-  # Enable Nix daemon
-  services.nix-daemon.enable = true;
-
-  # Nix configuration
-  nix = {
-    package = pkgs.nix;
-    settings = {
-      experimental-features = ["nix-command" "flakes"];
-      auto-optimise-store = true;
-    };
-    gc = {
-      automatic = true;
-      interval = {Weekday = 7;};
-      options = "--delete-older-than 7d";
-    };
-  };
+  # Nix configuration - disabled because using Determinate Nix
+  nix.enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Set primary user for system preferences
+  system.primaryUser = "gustavo";
 
   # macOS system preferences
   system.defaults = {
@@ -110,7 +99,8 @@
 
   # Fonts
   fonts.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono"];})
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
   ];
 
   # Homebrew integration (for GUI apps that aren't in nixpkgs)
@@ -122,22 +112,48 @@
       upgrade = true;
     };
 
+    taps = [
+      "koekeishiya/formulae"
+    ];
+
     brews = [
       "mas"
+      "skhd"
+      "yabai"
     ];
 
     casks = [
-      "raycast"
-      "karabiner-elements"
-      "ghostty"
+      "alt-tab"
+      "aws-vpn-client"
+      "bartender"
       "claude"
-      "firefox"
-      "visual-studio-code"
-      "figma"
-      "spotify"
+      "cursor"
+      "dbeaver-community"
       "discord"
-      "cleanmymac"
-      "1password"
+      "docker"
+      "figma"
+      "firefox"
+      "ghostty"
+      "google-chrome"
+      "intellij-idea-ce"
+      "karabiner-elements"
+      "microsoft-teams"
+      "mongodb-compass"
+      "notion"
+      "obsidian"
+      "orbstack"
+      "perimeter81"
+      "postman"
+      "qbittorrent"
+      "racket"
+      "rar"
+      "raycast"
+      "shottr"
+      "slack"
+      "spotify"
+      "stats"
+      "sublime-text"
+      "visual-studio-code"
     ];
 
     masApps = {
@@ -145,11 +161,6 @@
     };
   };
 
-  # System activation scripts
-  system.activationScripts.postUserActivation.text = ''
-    # Following line should allow us to avoid a logout/login cycle
-    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
-  '';
 
   # System version
   system.stateVersion = 5;

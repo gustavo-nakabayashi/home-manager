@@ -2,15 +2,15 @@
   description = "nix-darwin and Home Manager configuration";
 
   inputs.nixpkgs = {
-    url = "github:nixos/nixpkgs/nixos-25.05";
+    url = "github:nixos/nixpkgs/nixpkgs-25.05-darwin";
   };
 
   inputs.nixpkgs-unstable = {
-    url = "github:nixos/nixpkgs/nixos-unstable";
+    url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
 
   inputs.nix-darwin = {
-    url = "github:LnL7/nix-darwin";
+    url = "github:LnL7/nix-darwin/nix-darwin-25.05";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -38,7 +38,7 @@
     whatsapp-mcp,
   }: {
     darwinConfigurations = {
-      "Gustavos-MacBook-Air" = nix-darwin.lib.darwinSystem {
+      "Gustavos-MacBook-Pro" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
 
         specialArgs = {
