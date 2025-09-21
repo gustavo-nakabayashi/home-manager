@@ -8,17 +8,16 @@
 }: {
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
-  # Organize packages by category
+  # User-specific packages (development and CLI tools)
   home.packages = with pkgs;
     [
-      # Core tools
+      # Terminal and session management
       tmux
       tmuxinator
       tmux-mem-cpu-load
-      gh
-      # CLI utilities
+
+      # CLI utilities and file management
       lazygit
-      btop
       ranger
       ncdu
       fd
@@ -29,19 +28,18 @@
       sops
       mysql80
       wget
-
       tree-sitter
 
-      # AI assistants
+      # AI and learning tools
       mcp-nixos
       uv
       exercism
 
-      # DevOps
+      # DevOps tools
       terraform
       awscli2
 
-      # Programming languages
+      # Programming languages and runtimes
       nodejs
       pnpm
       go
@@ -54,7 +52,7 @@
       clj-kondo
       leiningen
 
-      # LSPs
+      # Language servers
       bash-language-server
       clojure-lsp
       gopls
@@ -68,7 +66,7 @@
       yaml-language-server
       sonarlint-ls
 
-      # Formatters
+      # Code formatters
       alejandra
       stylua
       gofumpt
@@ -76,23 +74,10 @@
       nodePackages.prettier
       cljfmt
 
-      # # Build dependencies
-      bison
-      flex
-      fontforge
-      makeWrapper
-      pkg-config
-      gnumake
-      gcc
-      libiconv
-      autoconf
-      automake
-      libtool
-
-      # Theme
+      # Shell theme
       zsh-powerlevel10k
 
-      # Custom scripts
+      # Custom user scripts
       (pkgs.writeShellScriptBin "tmux-sessionizer" (builtins.readFile (builtins.path {
         path = ./home/scripts/tmux-sessionizer.sh;
         name = "tmux-sessionizer-sh";
@@ -109,7 +94,6 @@
     ++ (with pkgs-unstable; [
       neovim
       claude-code
-      # AI assistants (unstable)
     ]);
 
   home.file.".config" = {
@@ -200,7 +184,8 @@
 
     shellAliases = {
       ll = "ls -l";
-      update = "home-manager switch";
+      update = "darwin-rebuild switch --flake ~/.config/home-manager";
+      update-home = "home-manager switch";
       lg = "lazygit";
       rn = "ranger";
       gc = "git clone";
