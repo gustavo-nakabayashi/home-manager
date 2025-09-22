@@ -46,47 +46,47 @@
 
   # macOS system preferences
   system.defaults = {
-    dock = {
-      autohide = true;
-      autohide-delay = 0.0;
-      autohide-time-modifier = 0.2;
-      orientation = "bottom";
-      show-recents = false;
-      tilesize = 48;
-      minimize-to-application = true;
-    };
+    # dock = {
+    #   autohide = true;
+    #   autohide-delay = 0.0;
+    #   autohide-time-modifier = 0.2;
+    #   orientation = "bottom";
+    #   show-recents = false;
+    #   tilesize = 48;
+    #   minimize-to-application = true;
+    # };
+    #
+    # finder = {
+    #   AppleShowAllExtensions = true;
+    #   ShowPathbar = true;
+    #   ShowStatusBar = true;
+    #   FXDefaultSearchScope = "SCcf";
+    #   FXPreferredViewStyle = "clmv";
+    # };
+    #
+    # NSGlobalDomain = {
+    #   AppleInterfaceStyle = null;
+    #   AppleKeyboardUIMode = 3;
+    #   ApplePressAndHoldEnabled = false;
+    #   InitialKeyRepeat = 15;
+    #   KeyRepeat = 2;
+    #   NSAutomaticCapitalizationEnabled = false;
+    #   NSAutomaticDashSubstitutionEnabled = false;
+    #   NSAutomaticPeriodSubstitutionEnabled = false;
+    #   NSAutomaticQuoteSubstitutionEnabled = false;
+    #   NSAutomaticSpellingCorrectionEnabled = false;
+    #   NSNavPanelExpandedStateForSaveMode = true;
+    #   NSNavPanelExpandedStateForSaveMode2 = true;
+    #   _HIHideMenuBar = false;
+    # };
 
-    finder = {
-      AppleShowAllExtensions = true;
-      ShowPathbar = true;
-      ShowStatusBar = true;
-      FXDefaultSearchScope = "SCcf";
-      FXPreferredViewStyle = "clmv";
-    };
-
-    NSGlobalDomain = {
-      AppleInterfaceStyle = null;
-      AppleKeyboardUIMode = 3;
-      ApplePressAndHoldEnabled = false;
-      InitialKeyRepeat = 15;
-      KeyRepeat = 2;
-      NSAutomaticCapitalizationEnabled = false;
-      NSAutomaticDashSubstitutionEnabled = false;
-      NSAutomaticPeriodSubstitutionEnabled = false;
-      NSAutomaticQuoteSubstitutionEnabled = false;
-      NSAutomaticSpellingCorrectionEnabled = false;
-      NSNavPanelExpandedStateForSaveMode = true;
-      NSNavPanelExpandedStateForSaveMode2 = true;
-      _HIHideMenuBar = false;
-    };
-
-    trackpad = {
-      Clicking = true;
-      TrackpadThreeFingerDrag = true;
-    };
+    # trackpad = {
+    #   Clicking = true;
+    #   TrackpadThreeFingerDrag = true;
+    # };
 
     screencapture = {
-      location = "~/Desktop/Screenshots";
+      location = "~/Documents/Screenshots";
       type = "png";
     };
   };
