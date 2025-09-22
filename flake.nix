@@ -28,6 +28,25 @@
     flake = false;
   };
 
+  inputs.nix-homebrew = {
+    url = "github:zhaofengli/nix-homebrew";
+  };
+
+  # Optional: Declarative tap management
+  inputs.homebrew-core = {
+    url = "github:homebrew/homebrew-core";
+    flake = false;
+  };
+  inputs.homebrew-cask = {
+    url = "github:homebrew/homebrew-cask";
+    flake = false;
+  };
+
+  inputs.homebrew-formulae = {
+    url = "github:koekeishiya/homebrew-formulae";
+    flake = false;
+  };
+
   outputs = {
     self,
     nixpkgs,
@@ -36,6 +55,10 @@
     home-manager,
     mcp-nixos,
     whatsapp-mcp,
+    nix-homebrew,
+    homebrew-core,
+    homebrew-cask,
+    homebrew-formulae,
   }: {
     darwinConfigurations = {
       "Gustavos-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -66,6 +89,35 @@
               whatsapp-mcp = whatsapp-mcp;
             };
           }
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              # Install Homebrew under the default prefix
+              enable = true;
+
+              # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
+              enableRosetta = true;
+
+              # User owning the Homebrew prefix
+              user = "gustavo";
+
+              # Optional: Declarative tap management
+              taps = {
+                "homebrew/homebrew-core" = homebrew-core;
+                "homebrew/homebrew-cask" = homebrew-cask;
+                "koekeishiya/homebrew-formulae" = homebrew-formulae;
+              };
+
+              # Optional: Enable fully-declarative tap management
+              #
+              # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
+              mutableTaps = false;
+            };
+          }
+          # Optional: Align homebrew taps config with nix-homebrew
+          ({config, ...}: {
+            homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
+          })
         ];
       };
 

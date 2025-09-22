@@ -184,7 +184,7 @@
 
     shellAliases = {
       ll = "ls -l";
-      update = "darwin-rebuild switch --flake ~/.config/home-manager";
+      update = "sudo darwin-rebuild switch --flake ~/.config/home-manager";
       update-home = "home-manager switch";
       lg = "lazygit";
       rn = "ranger";

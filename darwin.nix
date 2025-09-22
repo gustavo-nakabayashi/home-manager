@@ -46,48 +46,23 @@
 
   # macOS system preferences
   system.defaults = {
-    # dock = {
-    #   autohide = true;
-    #   autohide-delay = 0.0;
-    #   autohide-time-modifier = 0.2;
-    #   orientation = "bottom";
-    #   show-recents = false;
-    #   tilesize = 48;
-    #   minimize-to-application = true;
-    # };
-    #
-    # finder = {
-    #   AppleShowAllExtensions = true;
-    #   ShowPathbar = true;
-    #   ShowStatusBar = true;
-    #   FXDefaultSearchScope = "SCcf";
-    #   FXPreferredViewStyle = "clmv";
-    # };
-    #
-    # NSGlobalDomain = {
-    #   AppleInterfaceStyle = null;
-    #   AppleKeyboardUIMode = 3;
-    #   ApplePressAndHoldEnabled = false;
-    #   InitialKeyRepeat = 15;
-    #   KeyRepeat = 2;
-    #   NSAutomaticCapitalizationEnabled = false;
-    #   NSAutomaticDashSubstitutionEnabled = false;
-    #   NSAutomaticPeriodSubstitutionEnabled = false;
-    #   NSAutomaticQuoteSubstitutionEnabled = false;
-    #   NSAutomaticSpellingCorrectionEnabled = false;
-    #   NSNavPanelExpandedStateForSaveMode = true;
-    #   NSNavPanelExpandedStateForSaveMode2 = true;
-    #   _HIHideMenuBar = false;
-    # };
+    dock = {
+      # Desktop & Dock -> Mission Control -> Automatically rearrange Spaces based on most recent use
+      mru-spaces = false;
 
-    # trackpad = {
-    #   Clicking = true;
-    #   TrackpadThreeFingerDrag = true;
-    # };
+      # Desktop & Dock -> Desktop & Stage Manager -> Show Items On Desktop
+      # Desktop & Dock -> Desktop & Stage Manager -> Click wallpaper to reveal Desktop
+      # Note: These settings may require manual configuration in System Settings
+      # as they might not be available through nix-darwin defaults
+    };
 
     screencapture = {
       location = "~/Documents/Screenshots";
       type = "png";
+    };
+
+    universalaccess = {
+      reduceMotion = true;
     };
   };
 
@@ -123,10 +98,6 @@
       cleanup = "zap";
       upgrade = true;
     };
-
-    taps = [
-      "koekeishiya/formulae"
-    ];
 
     brews = [
       "mas"
@@ -166,13 +137,13 @@
       "sublime-text"
       "visual-studio-code"
       "1password"
+      "steam"
     ];
 
     masApps = {
       "Xcode" = 497799835;
     };
   };
-
 
   # System version
   system.stateVersion = 5;

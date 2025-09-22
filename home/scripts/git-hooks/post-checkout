@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-if [[ "$1" == "0000000000000000000000000000000000000000" ]]; then
-    basePath="$HOME/Programs/bridge/bridge-app-ui-main"
-    paths=(.env .env.local .mcp.json .envrc)
-
-    for path in "${paths[@]}"; do
-        if [[ -f "$basePath/$path" ]]; then
-            ln -sf "$basePath/$path" "$(pwd)/$path"
-            echo "✅ Copied $path"
-        fi
-    done
-
-    direnv allow
-fi
+# if [[ "$1" == "0000000000000000000000000000000000000000" ]]; then
+#     basePath="$HOME/Programs/bridge/bridge-app-ui-main"
+#     paths=(.env .env.local .mcp.json .envrc)
+#
+#     for path in "${paths[@]}"; do
+#         if [[ -f "$basePath/$path" ]]; then
+#             ln -sf "$basePath/$path" "$(pwd)/$path"
+#             echo "✅ Copied $path"
+#         fi
+#     done
+#
+#     direnv allow
+# fi
