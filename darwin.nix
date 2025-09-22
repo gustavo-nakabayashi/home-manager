@@ -91,16 +91,28 @@
     };
   };
 
-  # System keyboard shortcuts and input
-  system.keyboard = {
-    enableKeyMapping = true;
-    remapCapsLockToEscape = true;
-  };
+  # # System keyboard shortcuts and input
+  # system.keyboard = {
+  #   enableKeyMapping = true;
+  #   remapCapsLockToEscape = true;
+  # };
 
   # Fonts
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
+    # Custom font - place Comic Code Ligatures in home/fonts/
+    (pkgs.stdenv.mkDerivation {
+      name = "comic-code-ligatures";
+      src = builtins.path {
+        path = ./home/fonts;
+        name = "fonts";
+      };
+      installPhase = ''
+        mkdir -p $out/share/fonts/truetype
+        cp -r * $out/share/fonts/truetype/
+      '';
+    })
   ];
 
   # Homebrew integration (for GUI apps that aren't in nixpkgs)

@@ -68,6 +68,34 @@
           }
         ];
       };
+
+      "Gustavos-MacBook-Pro-Gaming" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+
+        specialArgs = {
+          pkgs-unstable = import nixpkgs-unstable {
+            system = "aarch64-darwin";
+            config.allowUnfree = true;
+          };
+          mcp-nixos = mcp-nixos.packages.aarch64-darwin.default;
+          whatsapp-mcp = whatsapp-mcp;
+        };
+
+        modules = [
+          ./darwin-gaming.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.gaming = {
+              home.stateVersion = "23.11";
+              home.username = "gaming";
+              home.homeDirectory = "/Users/gaming";
+              programs.home-manager.enable = true;
+            };
+          }
+        ];
+      };
     };
 
     homeConfigurations = {
