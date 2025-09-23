@@ -1,51 +1,51 @@
 # change window focus withing space
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
-alt - h : yabai -m window --focus west || yabai -m display --focus west
-alt - l : yabai -m window --focus east || yabai -m display --focus east
+alt - j : /opt/homebrew/bin/yabai -m window --focus south
+alt - k : /opt/homebrew/bin/yabai -m window --focus north
+alt - h : /opt/homebrew/bin/yabai -m window --focus west || /opt/homebrew/bin/yabai -m display --focus west
+alt - l : /opt/homebrew/bin/yabai -m window --focus east || /opt/homebrew/bin/yabai -m display --focus east
 
 # toggle float
-shift + alt - t : yabai -m window --toggle float --grid 4:4:1:1:2:2; sketchybar --trigger window_focus
+shift + alt - t : /opt/homebrew/bin/yabai -m window --toggle float --grid 4:4:1:1:2:2; sketchybar --trigger window_focus
 
 # maximize a window
-shift + alt - return : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
+shift + alt - return : /opt/homebrew/bin/yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
 
 # balance out windows
-shift + alt - e : yabai -m space --balance
+shift + alt - e : /opt/homebrew/bin/yabai -m space --balance
 
 # -- Moving Windows Around --
 
 # swap windows
-shift + alt - j : yabai -m window --swap south
-shift + alt - k : yabai -m window --swap north
-shift + alt - h : yabai -m window --swap west 2>&1 | grep -q . && yabai -m window --display west --focus;
-shift + alt - l : yabai -m window --swap east 2>&1 | grep -q . && eval "yabai -m window --display east --focus; yabai -m space --mirror y-axis"
+shift + alt - j : /opt/homebrew/bin/yabai -m window --swap south
+shift + alt - k : /opt/homebrew/bin/yabai -m window --swap north
+shift + alt - h : /opt/homebrew/bin/yabai -m window --swap west 2>&1 | grep -q . && /opt/homebrew/bin/yabai -m window --display west --focus;
+shift + alt - l : /opt/homebrew/bin/yabai -m window --swap east 2>&1 | grep -q . && eval "/opt/homebrew/bin/yabai -m window --display east --focus; /opt/homebrew/bin/yabai -m space --mirror y-axis"
 
-hyper - j : yabai -m window --swap south
-hyper - k : yabai -m window --swap north
-hyper - h : yabai -m window --swap west 2>&1 | grep -q . && yabai -m window --display west --focus;
-hyper - l : yabai -m window --swap east 2>&1 | grep -q . && eval "yabai -m window --display east --focus; yabai -m space --mirror y-axis"
+hyper - j : /opt/homebrew/bin/yabai -m window --swap south
+hyper - k : /opt/homebrew/bin/yabai -m window --swap north
+hyper - h : /opt/homebrew/bin/yabai -m window --swap west 2>&1 | grep -q . && /opt/homebrew/bin/yabai -m window --display west --focus;
+hyper - l : /opt/homebrew/bin/yabai -m window --swap east 2>&1 | grep -q . && eval "/opt/homebrew/bin/yabai -m window --display east --focus; /opt/homebrew/bin/yabai -m space --mirror y-axis"
 
 # move window to space #
-shift + alt - 1 : yabai -m window --space 1 --focus
-shift + alt - 2 : yabai -m window --space 2 --focus
-shift + alt - 3 : yabai -m window --space 3 --focus
-shift + alt - 4 : yabai -m window --space 4 --focus
-shift + alt - 5 : yabai -m window --space 5 --focus
-shift + alt - 6 : yabai -m window --space 6 --focus
-shift + alt - 7 : yabai -m window --space 7 --focus
+shift + alt - 1 : /opt/homebrew/bin/yabai -m window --space 1 --focus
+shift + alt - 2 : /opt/homebrew/bin/yabai -m window --space 2 --focus
+shift + alt - 3 : /opt/homebrew/bin/yabai -m window --space 3 --focus
+shift + alt - 4 : /opt/homebrew/bin/yabai -m window --space 4 --focus
+shift + alt - 5 : /opt/homebrew/bin/yabai -m window --space 5 --focus
+shift + alt - 6 : /opt/homebrew/bin/yabai -m window --space 6 --focus
+shift + alt - 7 : /opt/homebrew/bin/yabai -m window --space 7 --focus
 
-hyper - 1 : yabai -m window --space 1 --focus
-hyper - 2 : yabai -m window --space 2 --focus
-hyper - 3 : yabai -m window --space 3 --focus
-hyper - 4 : yabai -m window --space 4 --focus
-hyper - 5 : yabai -m window --space 5 --focus
-hyper - 6 : yabai -m window --space 6 --focus
-hyper - 7 : yabai -m window --space 7 --focus
+hyper - 1 : /opt/homebrew/bin/yabai -m window --space 1 --focus
+hyper - 2 : /opt/homebrew/bin/yabai -m window --space 2 --focus
+hyper - 3 : /opt/homebrew/bin/yabai -m window --space 3 --focus
+hyper - 4 : /opt/homebrew/bin/yabai -m window --space 4 --focus
+hyper - 5 : /opt/homebrew/bin/yabai -m window --space 5 --focus
+hyper - 6 : /opt/homebrew/bin/yabai -m window --space 6 --focus
+hyper - 7 : /opt/homebrew/bin/yabai -m window --space 7 --focus
 
 # -- Starting/Stopping/Restarting Yabai --
 
-# stop/start/restart yabai
-# shift + ctrl - q : yabai --stop-service
-# shift + ctrl - s : yabai --start-service
-# shift + ctrl - r : yabai --restart-service
+# stop/start/restart /opt/homebrew/bin/yabai
+# shift + ctrl - q : /opt/homebrew/bin/yabai --stop-service
+# shift + ctrl - s : /opt/homebrew/bin/yabai --start-service
+# shift + ctrl - r : /opt/homebrew/bin/yabai --restart-service
