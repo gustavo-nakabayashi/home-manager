@@ -47,13 +47,7 @@
   # macOS system preferences
   system.defaults = {
     dock = {
-      # Desktop & Dock -> Mission Control -> Automatically rearrange Spaces based on most recent use
       mru-spaces = false;
-
-      # Desktop & Dock -> Desktop & Stage Manager -> Show Items On Desktop
-      # Desktop & Dock -> Desktop & Stage Manager -> Click wallpaper to reveal Desktop
-      # Note: These settings may require manual configuration in System Settings
-      # as they might not be available through nix-darwin defaults
     };
 
     screencapture = {
@@ -66,17 +60,9 @@
     };
   };
 
-  # # System keyboard shortcuts and input
-  # system.keyboard = {
-  #   enableKeyMapping = true;
-  #   remapCapsLockToEscape = true;
-  # };
-
-  # Fonts
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
-    # Custom font - place Comic Code Ligatures in home/fonts/
     (pkgs.stdenv.mkDerivation {
       name = "comic-code-ligatures";
       src = builtins.path {
