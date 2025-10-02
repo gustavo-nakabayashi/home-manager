@@ -42,11 +42,6 @@
     flake = false;
   };
 
-  inputs.homebrew-formulae = {
-    url = "github:koekeishiya/homebrew-formulae";
-    flake = false;
-  };
-
   outputs = {
     self,
     nixpkgs,
@@ -58,7 +53,6 @@
     nix-homebrew,
     homebrew-core,
     homebrew-cask,
-    homebrew-formulae,
   }: {
     darwinConfigurations = {
       "Gustavos-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -105,7 +99,6 @@
               taps = {
                 "homebrew/homebrew-core" = homebrew-core;
                 "homebrew/homebrew-cask" = homebrew-cask;
-                "koekeishiya/homebrew-formulae" = homebrew-formulae;
               };
 
               # Optional: Enable fully-declarative tap management
@@ -120,7 +113,6 @@
           })
         ];
       };
-
     };
 
     homeConfigurations = {

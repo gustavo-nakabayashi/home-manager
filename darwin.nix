@@ -27,6 +27,9 @@
 
     # System monitoring
     btop
+
+    # Window management
+    pkgs-unstable.aerospace
   ];
 
   # System-wide environment variables
@@ -63,17 +66,6 @@
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
-    (pkgs.stdenv.mkDerivation {
-      name = "comic-code-ligatures";
-      src = builtins.path {
-        path = ./home/fonts;
-        name = "fonts";
-      };
-      installPhase = ''
-        mkdir -p $out/share/fonts/truetype
-        cp -r * $out/share/fonts/truetype/
-      '';
-    })
   ];
 
   # Homebrew integration (for GUI apps that aren't in nixpkgs)
@@ -87,8 +79,6 @@
 
     brews = [
       "mas"
-      "skhd"
-      "yabai"
     ];
 
     casks = [
@@ -130,6 +120,9 @@
       "Xcode" = 497799835;
     };
   };
+
+  # Enable Touch ID for sudo
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # System version
   system.stateVersion = 5;
