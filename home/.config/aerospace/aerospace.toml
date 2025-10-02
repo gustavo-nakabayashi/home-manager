@@ -1,0 +1,182 @@
+# AeroSpace configuration replicating yabai/skhd workflow
+
+# Basic configuration
+start-at-login = true
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# Layout settings (equivalent to yabai bsp layout)
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# Gaps configuration (equivalent to yabai padding/gaps)
+[gaps]
+inner.horizontal = 12
+inner.vertical = 12
+outer.left = 12
+outer.bottom = 12
+outer.top = 12
+outer.right = 12
+
+# Key bindings in main mode
+[mode.main.binding]
+
+# Window focus (equivalent to alt+hjkl in skhd)
+# Note: AeroSpace focus automatically handles monitor fallback
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# Window movement with monitor fallback (equivalent to shift+alt+hjkl)
+alt-shift-h = 'move left --boundaries all-monitors-outer-frame --focus-follows-window'
+alt-shift-j = 'move down --boundaries all-monitors-outer-frame'
+alt-shift-k = 'move up --boundaries all-monitors-outer-frame'
+alt-shift-l = 'move right --boundaries all-monitors-outer-frame --focus-follows-window'
+
+# Hyper key bindings (additional set from your skhd)
+# Assuming hyper is cmd+shift+ctrl+alt
+cmd-shift-ctrl-alt-h = 'move left --boundaries all-monitors-outer-frame'
+cmd-shift-ctrl-alt-j = 'move down --boundaries all-monitors-outer-frame'
+cmd-shift-ctrl-alt-k = 'move up --boundaries all-monitors-outer-frame'
+cmd-shift-ctrl-alt-l = 'move right --boundaries all-monitors-outer-frame'
+
+# Workspace navigation (using caps_lock via karabiner)
+f13-1 = 'workspace 1'
+f13-2 = 'workspace 2'
+f13-3 = 'workspace 3'
+f13-4 = 'workspace 4'
+f13-5 = 'workspace 5'
+f13-6 = 'workspace 6'
+f13-7 = 'workspace 7'
+
+# Move window to workspace (equivalent to shift+alt+number in skhd)
+alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1', 'focus --follow-window']
+alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2', 'focus --follow-window']
+alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3', 'focus --follow-window']
+alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4', 'focus --follow-window']
+alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5', 'focus --follow-window']
+alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6', 'focus --follow-window']
+alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7', 'focus --follow-window']
+
+# Hyper key workspace movement
+cmd-shift-ctrl-alt-1 = ['move-node-to-workspace 1', 'workspace 1', 'focus --follow-window']
+cmd-shift-ctrl-alt-2 = ['move-node-to-workspace 2', 'workspace 2', 'focus --follow-window']
+cmd-shift-ctrl-alt-3 = ['move-node-to-workspace 3', 'workspace 3', 'focus --follow-window']
+cmd-shift-ctrl-alt-4 = ['move-node-to-workspace 4', 'workspace 4', 'focus --follow-window']
+cmd-shift-ctrl-alt-5 = ['move-node-to-workspace 5', 'workspace 5', 'focus --follow-window']
+cmd-shift-ctrl-alt-6 = ['move-node-to-workspace 6', 'workspace 6', 'focus --follow-window']
+cmd-shift-ctrl-alt-7 = ['move-node-to-workspace 7', 'workspace 7', 'focus --follow-window']
+
+# Window management (equivalent to yabai window management)
+alt-shift-t = 'layout floating tiling' # Toggle float
+alt-shift-return = 'fullscreen'         # Toggle fullscreen
+alt-shift-e = 'balance-sizes'           # Balance windows
+
+# Layout switching
+alt-shift-b = 'layout tiles horizontal vertical'  # Toggle BSP orientation
+alt-shift-s = 'layout accordion horizontal'       # Stack layout for workspace 3
+
+# Resize mode
+alt-r = 'mode resize'
+
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+enter = 'mode main'
+esc = 'mode main'
+
+# App-to-workspace assignments (equivalent to yabai rules)
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.Browser'  # Arc
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'org.alacritty'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.googlecode.iterm2'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = 'move-node-to-workspace 3'
+
+# Apps to not manage (equivalent to yabai manage=off rules)
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.archiveutility'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.adobe.creative-cloud'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.logitech.manager'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Music'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'org.pqrs.Karabiner-Elements'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.valvesoftware.steam.helper'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.feral.xcom2'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.DigitalColorMeter'
+run = 'layout floating'
+
+# Set workspace 3 to accordion layout (equivalent to stack layout in yabai)
+[workspace-to-monitor-force-assignment]
+3 = 'main'
+
+[on-workspace-change]
+workspace.3 = 'layout accordion horizontal'
