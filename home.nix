@@ -96,11 +96,38 @@
       claude-code
     ]);
 
-  home.file.".config" = {
-    source = builtins.path {
-      path = ./home/.config;
-      name = "config";
-    };
+  home.file.".config/nvim" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/nvim";
+    recursive = true;
+  };
+
+  home.file.".config/aerospace" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/aerospace";
+    recursive = true;
+  };
+
+  home.file.".config/fd" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/fd";
+    recursive = true;
+  };
+
+  home.file.".config/ghostty" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/ghostty";
+    recursive = true;
+  };
+
+  home.file.".config/karabiner" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/karabiner";
+    recursive = true;
+  };
+
+  home.file.".config/ranger" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/ranger";
+    recursive = true;
+  };
+
+  home.file.".config/tmuxinator" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/tmuxinator";
     recursive = true;
   };
 
@@ -118,7 +145,6 @@
       name = "karabiner-edn";
     };
     ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.tmux.conf";
-    ".config/nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/lazy-lock.json";
     ".local/bin/tmux-sessionizer".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/scripts/tmux-sessionizer.sh";
     ".claude/settings.json".source = builtins.path {
       path = ./home/claude-settings.json;
