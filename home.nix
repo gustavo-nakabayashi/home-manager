@@ -96,61 +96,42 @@
       claude-code
     ]);
 
-  home.file.".config/nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/nvim";
-    recursive = true;
-  };
-
-  home.file.".config/aerospace" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/aerospace";
-    recursive = true;
-  };
-
-  home.file.".config/fd" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/fd";
-    recursive = true;
-  };
-
-  home.file.".config/ghostty" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/ghostty";
-    recursive = true;
-  };
-
-  home.file.".config/karabiner" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/karabiner";
-    recursive = true;
-  };
-
-  home.file.".config/ranger" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/ranger";
-    recursive = true;
-  };
-
-  home.file.".config/tmuxinator" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/tmuxinator";
-    recursive = true;
-  };
-
-  home.file = {
-    ".p10k.zsh".source = builtins.path {
-      path = ./home/.p10k.zsh;
-      name = "p10k-zsh";
+  home.file =
+    builtins.listToAttrs (map (dir: {
+        name = ".config/${dir}";
+        value = {
+          source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.config/${dir}";
+          recursive = true;
+        };
+      }) [
+        "nvim"
+        "aerospace"
+        "fd"
+        "ghostty"
+        "karabiner"
+        "ranger"
+        "tmuxinator"
+      ])
+    // {
+      ".p10k.zsh".source = builtins.path {
+        path = ./home/.p10k.zsh;
+        name = "p10k-zsh";
+      };
+      ".gitignore".source = builtins.path {
+        path = ./home/.gitignore;
+        name = "gitignore";
+      };
+      "karabiner.edn".source = builtins.path {
+        path = ./home/karabiner.edn;
+        name = "karabiner-edn";
+      };
+      ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.tmux.conf";
+      ".local/bin/tmux-sessionizer".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/scripts/tmux-sessionizer.sh";
+      ".claude/settings.json".source = builtins.path {
+        path = ./home/claude-settings.json;
+        name = "claude-settings-json";
+      };
     };
-    ".gitignore".source = builtins.path {
-      path = ./home/.gitignore;
-      name = "gitignore";
-    };
-    "karabiner.edn".source = builtins.path {
-      path = ./home/karabiner.edn;
-      name = "karabiner-edn";
-    };
-    ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.tmux.conf";
-    ".local/bin/tmux-sessionizer".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/scripts/tmux-sessionizer.sh";
-    ".claude/settings.json".source = builtins.path {
-      path = ./home/claude-settings.json;
-      name = "claude-settings-json";
-    };
-  };
 
   # Environment variables
   home.sessionVariables = {
