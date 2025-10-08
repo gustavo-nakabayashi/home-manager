@@ -112,26 +112,38 @@
         "ranger"
         "tmuxinator"
       ])
-    // {
-      ".p10k.zsh".source = builtins.path {
-        path = ./home/.p10k.zsh;
-        name = "p10k-zsh";
-      };
-      ".gitignore".source = builtins.path {
-        path = ./home/.gitignore;
-        name = "gitignore";
-      };
-      "karabiner.edn".source = builtins.path {
-        path = ./home/karabiner.edn;
-        name = "karabiner-edn";
-      };
-      ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/.tmux.conf";
-      ".local/bin/tmux-sessionizer".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/home/scripts/tmux-sessionizer.sh";
-      ".claude/settings.json".source = builtins.path {
-        path = ./home/claude-settings.json;
-        name = "claude-settings-json";
-      };
-    };
+    // builtins.listToAttrs (map ({
+        target,
+        source,
+      }: {
+        name = target;
+        value.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/${source}";
+      }) [
+        {
+          target = ".p10k.zsh";
+          source = "home/.p10k.zsh";
+        }
+        {
+          target = ".gitignore";
+          source = "home/.gitignore";
+        }
+        {
+          target = "karabiner.edn";
+          source = "home/karabiner.edn";
+        }
+        {
+          target = ".claude/settings.json";
+          source = "home/claude-settings.json";
+        }
+        {
+          target = ".tmux.conf";
+          source = "home/.tmux.conf";
+        }
+        {
+          target = ".local/bin/tmux-sessionizer";
+          source = "home/scripts/tmux-sessionizer.sh";
+        }
+      ]);
 
   # Environment variables
   home.sessionVariables = {
