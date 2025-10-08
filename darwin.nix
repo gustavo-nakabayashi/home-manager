@@ -114,6 +114,8 @@
       "visual-studio-code"
       "1password"
       "steam"
+      "home-assistant"
+      "zen"
     ];
 
     masApps = {

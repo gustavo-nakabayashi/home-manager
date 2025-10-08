@@ -27,11 +27,11 @@
     url = "github:zhaofengli/nix-homebrew";
   };
 
-  # Optional: Declarative tap management
   inputs.homebrew-core = {
     url = "github:homebrew/homebrew-core";
     flake = false;
   };
+
   inputs.homebrew-cask = {
     url = "github:homebrew/homebrew-cask";
     flake = false;
@@ -103,33 +103,6 @@
           ({config, ...}: {
             homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
           })
-        ];
-      };
-    };
-
-    homeConfigurations = {
-      "gustavo" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "aarch64-darwin";
-          config.allowUnfree = true;
-        };
-
-        extraSpecialArgs = {
-          pkgs-unstable = import nixpkgs-unstable {
-            system = "aarch64-darwin";
-            config.allowUnfree = true;
-          };
-          mcp-nixos = mcp-nixos.packages.aarch64-darwin.default;
-        };
-
-        modules = [
-          ./home.nix
-          {
-            home = {
-              username = "gustavo";
-              homeDirectory = "/Users/gustavo";
-            };
-          }
         ];
       };
     };
