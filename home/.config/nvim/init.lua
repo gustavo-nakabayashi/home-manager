@@ -7,6 +7,7 @@ require "options"
 -- spec "user.plugins.bufdelete"
 -- spec "user.plugins.bufferline"
 spec "user.plugins.copilot"
+spec "user.plugins.claudecode"
 spec "user.plugins.matchup"
 
 
