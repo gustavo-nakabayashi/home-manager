@@ -78,6 +78,7 @@
     };
 
     brews = [
+      "borders"
       "mas"
     ];
 

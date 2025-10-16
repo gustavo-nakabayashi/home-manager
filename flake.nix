@@ -37,6 +37,11 @@
     flake = false;
   };
 
+  inputs.homebrew-felixkratz = {
+    url = "github:FelixKratz/homebrew-formulae";
+    flake = false;
+  };
+
   outputs = {
     self,
     nixpkgs,
@@ -47,6 +52,7 @@
     nix-homebrew,
     homebrew-core,
     homebrew-cask,
+    homebrew-felixkratz,
   }: {
     darwinConfigurations = {
       "Gustavos-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -91,6 +97,7 @@
               taps = {
                 "homebrew/homebrew-core" = homebrew-core;
                 "homebrew/homebrew-cask" = homebrew-cask;
+                "felixkratz/homebrew-formulae" = homebrew-felixkratz;
               };
 
               # Optional: Enable fully-declarative tap management

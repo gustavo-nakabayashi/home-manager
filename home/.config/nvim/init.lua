@@ -75,6 +75,9 @@ spec "user.plugins.schemastore"
 spec "user.plugins.undotree"
 spec "user.plugins.visual-star-search"
 
+-- ---- Testing
+spec "user.plugins.coverage"
+
 -- ---- Clojure/Lisp
 spec "user.plugins.conjure"
 spec "user.plugins.parinfer"

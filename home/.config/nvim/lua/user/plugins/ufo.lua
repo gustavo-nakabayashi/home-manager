@@ -10,7 +10,22 @@ local M = {
           relculright = true,
           segments = {
             { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
-            { text = { "%s" }, click = "v:lua.ScSa" },
+            {
+              sign = {
+                name = { ".*" },
+                namespace = { ".*" },
+                maxwidth = 1,
+                colwidth = 1,
+              },
+              click = "v:lua.ScSa",
+            },
+            {
+              sign = {
+                name = { "coverage_.*" },
+                maxwidth = 1,
+                colwidth = 1,
+              },
+            },
             { text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
           },
         }

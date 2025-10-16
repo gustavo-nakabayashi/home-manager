@@ -5,6 +5,11 @@ start-at-login = true
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
+# Startup commands
+after-startup-command = [
+  'exec-and-forget borders active_color=0xffffffff inactive_color=0x00000000 width=5.0'
+]
+
 # Layout settings (equivalent to yabai bsp layout)
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'

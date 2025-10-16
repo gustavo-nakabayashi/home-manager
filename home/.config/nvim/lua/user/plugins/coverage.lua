@@ -5,6 +5,11 @@ local M = {
 }
 
 function M.config()
+  -- Link coverage highlights to diagnostic colors
+  -- vim.api.nvim_set_hl(0, "CoverageCovered", { link = "DiagnosticOk" })
+  -- vim.api.nvim_set_hl(0, "CoverageUncovered", { link = "DiagnosticOk" })
+  -- vim.api.nvim_set_hl(0, "CoveragePartial", { link = "DiagnosticOk" })
+
   require("coverage").setup({
     auto_reload = true,
     lang = {

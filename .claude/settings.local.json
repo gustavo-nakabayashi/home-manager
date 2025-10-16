@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "mcp__mcp-nixos__nixos_search"
+      "mcp__mcp-nixos__nixos_search",
+      "WebFetch(domain:github.com)"
     ],
     "defaultMode": "acceptEdits"
   },
