@@ -77,6 +77,7 @@ spec "user.plugins.visual-star-search"
 
 -- ---- Testing
 spec "user.plugins.coverage"
+spec "user.plugins.neotest"
 
 -- ---- Clojure/Lisp
 spec "user.plugins.conjure"
