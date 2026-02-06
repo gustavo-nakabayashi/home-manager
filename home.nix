@@ -57,7 +57,7 @@
       clojure-lsp
       gopls
       lua-language-server
-      marksman
+      pkgs-unstable.marksman
       nil
       nixd
       terraform-ls
