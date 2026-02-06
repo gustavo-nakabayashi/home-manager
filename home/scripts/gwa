@@ -89,25 +89,61 @@ target_path="$work_dir/$folder_name"
 
 echo "Fetching latest changes..."
 if [[ -n "$bare_repo_dir" ]]; then
-    git -C "$bare_repo_dir" fetch origin "+refs/heads/*:refs/remotes/origin/*"
+    git -C "$bare_repo_dir" fetch origin
 else
-    git fetch origin "+refs/heads/*:refs/remotes/origin/*"
+    git fetch origin
 fi
 
 echo "Creating worktree for branch: $branch_name"
 echo "Target folder: $target_path"
 
+# Check if branch exists remotely
 if [[ -n "$bare_repo_dir" ]]; then
-    git -C "$bare_repo_dir" worktree add -b "$branch_name" "$target_path" "origin/$branch_name"
+    branch_exists=$(git -C "$bare_repo_dir" show-ref --verify --quiet refs/remotes/origin/"$branch_name" && echo "yes" || echo "no")
 else
-    git worktree add -b "$branch_name" "$target_path" "origin/$branch_name"
+    branch_exists=$(git show-ref --verify --quiet refs/remotes/origin/"$branch_name" && echo "yes" || echo "no")
+fi
+
+if [[ "$branch_exists" == "yes" ]]; then
+    echo "⚠️  Branch exists remotely, checking it out instead of creating new"
+    if [[ -n "$bare_repo_dir" ]]; then
+        git -C "$bare_repo_dir" worktree add "$target_path" "$branch_name"
+    else
+        git worktree add "$target_path" "$branch_name"
+    fi
+else
+    echo "Creating new branch based on origin/main"
+    if [[ -n "$bare_repo_dir" ]]; then
+        git -C "$bare_repo_dir" worktree add -b "$branch_name" "$target_path" origin/main
+        # Fix tracking: new branches should not track origin/main
+        git -C "$bare_repo_dir" config --unset "branch.${branch_name}.remote" 2>/dev/null || true
+        git -C "$bare_repo_dir" config --unset "branch.${branch_name}.merge" 2>/dev/null || true
+    else
+        git worktree add -b "$branch_name" "$target_path" origin/main
+        # Fix tracking: new branches should not track origin/main
+        git config --unset "branch.${branch_name}.remote" 2>/dev/null || true
+        git config --unset "branch.${branch_name}.merge" 2>/dev/null || true
+    fi
+    echo "💡 Remember to push with: git push -u origin $branch_name"
 fi
 
 if [[ $? -eq 0 ]]; then
     echo "✅ Worktree created successfully!"
     echo "📁 Path: $target_path"
     echo "🌿 Branch: $branch_name"
-    
+
+    # Copy necessary files from main worktree
+    basePath="$work_dir/main"
+    if [[ -d "$basePath" ]]; then
+        paths=(.env .mcp.json .envrc)
+        for path in "${paths[@]}"; do
+            if [[ -f "$basePath/$path" ]]; then
+                ln -sf "$basePath/$path" "$target_path/$path"
+                echo "✅ Linked $path"
+            fi
+        done
+    fi
+
     echo ""
     echo "To switch to this worktree:"
     echo "  cd $target_path"
