@@ -8,6 +8,7 @@ require "options"
 -- spec "user.plugins.bufferline"
 spec "user.plugins.copilot"
 spec "user.plugins.claudecode"
+spec "user.plugins.99"
 spec "user.plugins.matchup"
 
 
