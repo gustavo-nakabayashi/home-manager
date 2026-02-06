@@ -27,7 +27,7 @@ function M.config()
 
     { "<leader>f", group = "Find" },
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-    { "<leader>fc", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme" },
+    { "<leader>fC", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme" },
     {
       "<leader>ff",
       "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'fd', '--type', 'f', '--hidden', '--no-require-git', '--exclude', '.git' }})<cr>",
@@ -44,7 +44,7 @@ function M.config()
     { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent File" },
     { "<leader>fR", "<cmd>Telescope registers<cr>", desc = "Registers" },
     { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
-    { "<leader>fC", "<cmd>Telescope commands<cr>", desc = "Commands" },
+    { "<leader>fc", "<cmd>Telescope commands<cr>", desc = "Commands" },
     { "<leader>fg", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", desc = "RipGrep" },
     {
       "<leader>fw",
