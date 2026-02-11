@@ -112,6 +112,11 @@
     JAVA_HOME = "${pkgs.jdk21}";
   };
 
+  # Custom DNS resolver for local domains (forces AdGuard, skips Google DNS fallback)
+  environment.etc."resolver/local.com" = {
+    text = "nameserver 192.168.68.66";
+  };
+
   # Set PATH for GUI applications launched by launchd
   # Includes both system packages and Home Manager user packages
   launchd.user.envVariables = {
