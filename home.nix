@@ -85,17 +85,9 @@
         path = ./home/scripts/tmux-sessionizer.sh;
         name = "tmux-sessionizer-sh";
       })))
-      (pkgs.writeShellScriptBin "tmux-pin-current" (builtins.readFile (builtins.path {
-        path = ./home/scripts/tmux-pin-current;
-        name = "tmux-pin-current";
-      })))
       (pkgs.writeShellScriptBin "gw" ''
         exec ${pkgs-unstable.bun}/bin/bun run $HOME/.config/home-manager/home/scripts/gw.ts "$@"
       '')
-      (pkgs.writeShellScriptBin "gwa" (builtins.readFile (builtins.path {
-        path = ./home/scripts/gwa;
-        name = "gwa";
-      })))
     ]
     ++ (with pkgs-unstable; [
       neovim
