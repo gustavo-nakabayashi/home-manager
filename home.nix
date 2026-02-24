@@ -56,6 +56,7 @@
       bash-language-server
       clojure-lsp
       gopls
+      jdt-language-server
       lua-language-server
       pkgs-unstable.marksman
       nil
@@ -63,6 +64,7 @@
       terraform-ls
       vscode-langservers-extracted
       vtsls
+      nodePackages.typescript-language-server
       yaml-language-server
       sonarlint-ls
 
@@ -73,6 +75,7 @@
       goimports-reviser
       nodePackages.prettier
       cljfmt
+      google-java-format
 
       # Shell theme
       zsh-powerlevel10k
@@ -86,6 +89,9 @@
         path = ./home/scripts/tmux-pin-current;
         name = "tmux-pin-current";
       })))
+      (pkgs.writeShellScriptBin "gw" ''
+        exec ${pkgs-unstable.bun}/bin/bun run $HOME/.config/home-manager/home/scripts/gw.ts "$@"
+      '')
       (pkgs.writeShellScriptBin "gwa" (builtins.readFile (builtins.path {
         path = ./home/scripts/gwa;
         name = "gwa";
@@ -94,6 +100,7 @@
     ++ (with pkgs-unstable; [
       neovim
       claude-code
+      bun
     ]);
 
   home.file =
@@ -205,6 +212,7 @@
       ll = "ls -l";
       update = "sudo darwin-rebuild switch --flake ~/.config/home-manager";
       update-home = "home-manager switch";
+      upgrade = "sudo -v && nix flake update --flake ~/.config/home-manager && sudo darwin-rebuild switch --flake ~/.config/home-manager";
       lg = "lazygit";
       rn = "ranger";
       gc = "git clone";

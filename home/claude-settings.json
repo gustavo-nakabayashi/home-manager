@@ -1,3 +1,32 @@
 {
-  "alwaysThinkingEnabled": true
+  "enabledPlugins": {
+    "lua-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "jdtls-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": true,
+  "enableAllProjectMcpServers": true,
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(pnpm *)",
+      "Bash(npx *)",
+      "Bash(bun *)",
+      "Bash(node *)",
+      "Bash(python3 *)",
+      "Bash(go *)",
+      "Bash(curl *)",
+      "Bash(ssh *)",
+      "Bash(rsync *)",
+      "Bash(scp *)",
+      "Bash(ls *)",
+      "Bash(nix *)",
+      "Bash(which *)",
+      "Bash(make *)",
+      "WebSearch",
+      "mcp__*"
+    ]
+  }
 }

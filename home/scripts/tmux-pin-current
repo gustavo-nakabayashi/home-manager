@@ -1,37 +1,3 @@
 #!/usr/bin/env bash
-
-# Get current working directory
-current_dir=$(pwd)
-
-# Check if we're in a git worktree
-if ! git rev-parse --is-inside-work-tree &>/dev/null; then
-    tmux display-message "Not in a git repository"
-    exit 1
-fi
-
-# Get the worktree path (current directory)
-worktree_path=$(git rev-parse --show-toplevel)
-
-# Extract repo name from directory name
-repo_name=$(basename "$worktree_path")
-
-# Remove common worktree suffixes to get base repo name
-# Handle new gwa format: repo-name-number-description and old format: repo-name-suffix
-base_repo_name=$(echo "$repo_name" | sed -E 's/-[0-9]+-.*$//' | sed -E 's/-(main|current|dev|feature.*|fix.*|hotfix.*)$//')
-
-# Pins file location - write directly to repo file to ensure git tracking
-pins_file="$HOME/.config/home-manager/home/tmux-worktree-pins"
-
-# Create pins file if it doesn't exist
-if [[ ! -f "$pins_file" ]]; then
-    touch "$pins_file"
-fi
-
-# Remove existing pin for this repo
-grep -v "^${base_repo_name}:" "$pins_file" > "${pins_file}.tmp" 2>/dev/null || true
-mv "${pins_file}.tmp" "$pins_file"
-
-# Add new pin
-echo "${base_repo_name}:${worktree_path}" >> "$pins_file"
-
-tmux display-message "Pinned ${base_repo_name} to ${worktree_path}"
+echo "Note: 'tmux-pin-current' is deprecated. Use 'gw pin' instead." >&2
+exec gw pin "$@"
