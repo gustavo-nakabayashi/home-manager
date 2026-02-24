@@ -29,6 +29,7 @@ function M.config()
       "bash",
       "c",
       "go",
+      "java",
       "javascript",
       "lua",
       "luadoc",
