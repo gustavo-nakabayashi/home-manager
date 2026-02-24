@@ -5,3 +5,4 @@ dotfiles/karabiner/assets/node_modules
 .aider.tags.cache.v4
 .lsp/.cache
 .clj-kondo/.cache/v1
+home/.config/karabiner/automatic_backups
