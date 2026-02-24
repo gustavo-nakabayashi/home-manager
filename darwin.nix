@@ -203,6 +203,7 @@
       "home-assistant"
       "zen"
       "linear-linear"
+      "wispr-flow"
     ];
 
     masApps = {
