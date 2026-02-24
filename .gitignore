@@ -6,3 +6,4 @@ dotfiles/karabiner/assets/node_modules
 .lsp/.cache
 .clj-kondo/.cache/v1
 home/.config/karabiner/automatic_backups
+.claude/settings.local.json
