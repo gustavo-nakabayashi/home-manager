@@ -232,6 +232,19 @@
     };
   };
 
+  # Desk status server for standing desk automation
+  launchd.user.agents.desk-status = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/Users/gustavo/homelab/desk-status/desk-status"
+      ];
+      RunAtLoad = true;
+      KeepAlive = true;
+      StandardOutPath = "/Users/gustavo/Library/Logs/desk-status.log";
+      StandardErrorPath = "/Users/gustavo/Library/Logs/desk-status.log";
+    };
+  };
+
   # System version
   system.stateVersion = 5;
 
