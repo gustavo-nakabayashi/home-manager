@@ -22,7 +22,7 @@ This is a nix-darwin and Home Manager configuration repository for managing a ma
 1. Directories symlinked recursively (nvim, aerospace, fd, ghostty, karabiner, ranger, tmuxinator)
 2. Individual files with custom mappings (.p10k.zsh, .gitignore, karabiner.edn, claude-settings.json, .tmux.conf)
 
-**Script Integration**: Custom shell scripts (tmux-sessionizer, tmux-pin-current, gwa) are packaged as binaries using `writeShellScriptBin` and included in home.packages.
+**Script Integration**: Custom shell scripts (tmux-sessionizer, tmux-pin-current, gw) are packaged as binaries using `writeShellScriptBin` and included in home.packages. `gw` is a TypeScript script (`home/scripts/gw.ts`) run via bun that manages git bare-repo worktrees. Subcommands: `init`, `add`, `list`, `remove`, `cleanup`, `pin`, `register`, `unregister`, `paths`. The `cleanup` subcommand removes worktrees whose PRs were merged 30+ days ago (uses `gh pr view`), with `--all` to scan all registered repos, `--dry-run`, and `--force` flags. A `gw-cleanup` launchd agent in darwin.nix runs `gw cleanup --all` daily at 3 AM.
 
 **Git Conditional Configs**: Git configuration uses conditional includes to automatically set different email addresses for work directories (~/Programs/video-peel/ and ~/Programs/bridge/).
 
@@ -51,7 +51,7 @@ nix flake update
 
 When modifying the configuration:
 1. Edit the relevant .nix file (darwin.nix for system, home.nix for user)
-2. Test changes: `sudo darwin-rebuild switch --flake ~/.config/home-manager`
+2. Test changes: `update`
 3. If issues occur, previous generations can be rolled back
 
 ### Shell Aliases
