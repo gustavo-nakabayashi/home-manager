@@ -2,6 +2,7 @@ import { execSync, spawnSync } from "child_process";
 import {
   existsSync,
   readFileSync,
+  readdirSync,
   writeFileSync,
   mkdirSync,
   appendFileSync,
@@ -502,6 +503,207 @@ function cmdPaths() {
   }
 }
 
+interface WorktreeEntry {
+  path: string;
+  branch: string;
+}
+
+function parseWorktreeList(bareDir: string): WorktreeEntry[] {
+  const output = git("worktree list --porcelain", bareDir);
+  const entries: WorktreeEntry[] = [];
+  let currentPath = "";
+
+  for (const line of output.split("\n")) {
+    if (line.startsWith("worktree ")) {
+      currentPath = line.slice("worktree ".length);
+    } else if (line.startsWith("branch ")) {
+      const branch = line.slice("branch refs/heads/".length);
+      entries.push({ path: currentPath, branch });
+    }
+  }
+
+  return entries;
+}
+
+function findBareRepos(): string[] {
+  ensureConfig();
+  const searchPaths = readLines(SEARCH_PATHS_FILE);
+  const bareRepos: string[] = [];
+
+  for (const raw of searchPaths) {
+    const dir = resolve(expandTilde(raw));
+    if (!existsSync(dir)) continue;
+
+    let entries: string[];
+    try {
+      entries = readdirSync(dir);
+    } catch {
+      continue;
+    }
+
+    for (const entry of entries) {
+      if (entry.endsWith(".git")) {
+        const candidate = join(dir, entry);
+        try {
+          const isBare = git("rev-parse --is-bare-repository", candidate);
+          if (isBare === "true") {
+            bareRepos.push(candidate);
+          }
+        } catch {
+          // Not a git repo, skip
+        }
+      }
+    }
+  }
+
+  return bareRepos;
+}
+
+const MERGE_AGE_DAYS = 30;
+
+function cleanupRepo(
+  bareDir: string,
+  dryRun: boolean,
+  force: boolean
+): number {
+  const repoName = basename(bareDir, ".git");
+  const workDir = dirname(bareDir);
+
+  info(`\nChecking ${repoName} (${bareDir})`);
+
+  const worktrees = parseWorktreeList(bareDir);
+
+  // Read pins
+  const pins = readLines(PINS_FILE);
+  const pinnedPaths = new Set<string>();
+  for (const line of pins) {
+    const idx = line.indexOf(":");
+    if (idx > 0) pinnedPaths.add(line.slice(idx + 1));
+  }
+
+  // The "main" worktree folder
+  const mainPath = join(workDir, "main");
+
+  let removed = 0;
+
+  for (const wt of worktrees) {
+    // Skip the bare dir itself
+    if (wt.path === bareDir) continue;
+
+    // Skip the main worktree
+    if (wt.path === mainPath) continue;
+
+    // Skip pinned worktrees
+    if (pinnedPaths.has(wt.path)) {
+      info(`  skip (pinned): ${basename(wt.path)} [${wt.branch}]`);
+      continue;
+    }
+
+    // Check PR status via gh
+    let mergedAt: string | null = null;
+    let state: string | null = null;
+    try {
+      const prJson = execSync(
+        `gh pr view ${wt.branch} --json mergedAt,state`,
+        {
+          cwd: bareDir,
+          encoding: "utf-8",
+          stdio: ["pipe", "pipe", "pipe"],
+        }
+      ).trim();
+      const pr = JSON.parse(prJson);
+      state = pr.state;
+      mergedAt = pr.mergedAt;
+    } catch {
+      info(`  skip (no PR): ${basename(wt.path)} [${wt.branch}]`);
+      continue;
+    }
+
+    if (state !== "MERGED" || !mergedAt) {
+      info(`  skip (${state?.toLowerCase() || "unknown"}): ${basename(wt.path)} [${wt.branch}]`);
+      continue;
+    }
+
+    const mergedDate = new Date(mergedAt);
+    const ageDays = (Date.now() - mergedDate.getTime()) / (1000 * 60 * 60 * 24);
+
+    if (ageDays < MERGE_AGE_DAYS) {
+      info(
+        `  skip (merged ${Math.floor(ageDays)}d ago, < ${MERGE_AGE_DAYS}d): ${basename(wt.path)} [${wt.branch}]`
+      );
+      continue;
+    }
+
+    info(
+      `  ${dryRun ? "would remove" : "removing"}: ${basename(wt.path)} [${wt.branch}] (merged ${Math.floor(ageDays)}d ago)`
+    );
+
+    if (!dryRun) {
+      const forceFlag = force ? " --force" : "";
+      try {
+        execSync(`git worktree remove${forceFlag} ${wt.path}`, {
+          cwd: bareDir,
+          stdio: "inherit",
+        });
+        // Also delete the local branch
+        try {
+          git(`branch -d ${wt.branch}`, bareDir);
+          info(`  deleted branch: ${wt.branch}`);
+        } catch {
+          info(`  branch ${wt.branch} already gone or not fully merged locally`);
+        }
+        removed++;
+      } catch {
+        console.error(`  failed to remove ${wt.path}`);
+      }
+    } else {
+      removed++;
+    }
+  }
+
+  return removed;
+}
+
+function cmdCleanup(args: string[]) {
+  const all = args.includes("--all");
+  const dryRun = args.includes("--dry-run");
+  const force = args.includes("--force");
+
+  if (dryRun) info("Dry run mode — no changes will be made\n");
+
+  let totalRemoved = 0;
+
+  if (all) {
+    const bareRepos = findBareRepos();
+    if (bareRepos.length === 0) {
+      info("No bare repos found in search paths.");
+      return;
+    }
+    info(`Found ${bareRepos.length} bare repo(s)`);
+    for (const bareDir of bareRepos) {
+      totalRemoved += cleanupRepo(bareDir, dryRun, force);
+    }
+  } else {
+    let bareDir: string;
+    try {
+      const repoInfo = resolveBareRepo();
+      bareDir = repoInfo.bareDir;
+    } catch {
+      die("Not inside a git repository");
+    }
+
+    if (!bareDir) {
+      die("Not inside a bare repo or worktree.");
+    }
+
+    totalRemoved = cleanupRepo(bareDir, dryRun, force);
+  }
+
+  info(
+    `\n${dryRun ? "Would remove" : "Removed"} ${totalRemoved} worktree(s)`
+  );
+}
+
 // --- Dispatch ---
 
 function main() {
@@ -517,6 +719,8 @@ Commands:
   add <branch-name>             Create worktree with smart folder naming
   list                          List worktrees, mark pinned one
   remove <name> [--force]       Remove worktree safely
+  cleanup [--all] [--dry-run] [--force]
+                                Remove worktrees with merged PRs (30+ days)
   pin                           Pin current worktree as default for repo
   register [path]               Add path to tmux-sessionizer search paths
   unregister [path]             Remove path from search paths
@@ -535,6 +739,8 @@ Commands:
     case "remove":
     case "rm":
       return cmdRemove(args);
+    case "cleanup":
+      return cmdCleanup(args);
     case "pin":
       return cmdPin();
     case "register":

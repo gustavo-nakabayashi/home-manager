@@ -232,6 +232,25 @@
     };
   };
 
+  # Auto-cleanup merged worktrees daily
+  launchd.user.agents.gw-cleanup = {
+    serviceConfig = {
+      ProgramArguments = [
+        "/run/current-system/sw/bin/gw"
+        "cleanup"
+        "--all"
+      ];
+      StartCalendarInterval = [
+        {
+          Hour = 3;
+          Minute = 0;
+        }
+      ];
+      StandardOutPath = "/Users/gustavo/Library/Logs/gw-cleanup.log";
+      StandardErrorPath = "/Users/gustavo/Library/Logs/gw-cleanup.log";
+    };
+  };
+
   # Desk status server for standing desk automation
   launchd.user.agents.desk-status = {
     serviceConfig = {
